@@ -3,4 +3,4 @@
   tasks:
 
 - name: Include vmDeployment.yml
-  include: roles/common/tasks/vmDeployment.yml
+  import_playbook: roles/common/tasks/vmDeployment.yml

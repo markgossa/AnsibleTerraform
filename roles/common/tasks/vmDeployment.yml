@@ -5,10 +5,6 @@
       include_vars:
         file: '../vars/vmDeploymentVars.yml'
 
-    - name: Import variables from azureCredentials.yml
-      include_vars:
-        file: '../vars/azureCredentials.yml'
-
     - name: Run terraform init
       command: terraform init ../files
 
