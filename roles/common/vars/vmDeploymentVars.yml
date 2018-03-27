@@ -3,9 +3,8 @@ resourceGroupLocation: EastUS
 storageAccountName: storageacc79ruds780
 virtualNetworkName: vmnetwork
 virtualNetworkAddressSpace: 10.0.0.0/8
-virtualNetworkDnsServers: 
-  - 10.0.0.11
-  - 10.0.0.12
+virtualNetworkDnsServer1: 10.0.0.11
+virtualNetworkDnsServer2: 10.0.0.12
 subnetName: lan
 subnetNetworkID: 10.0.0.0/24
 storageAccountTier: Standard
