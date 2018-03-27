@@ -33,7 +33,7 @@ variable "virtualNetworkDnsServer1" {
     type = "string"
 }
 
-variable "virtualNetworkDnsServer1" {
+variable "virtualNetworkDnsServer2" {
     type = "string"
 }
 
