@@ -1,4 +1,4 @@
-resourceGroupName: HelloWorld1
+resourceGroupName: AnsibleTerraform
 resourceGroupLocation: EastUS
 storageAccountName: storageacc79ruds780
 virtualNetworkName: vmnetwork

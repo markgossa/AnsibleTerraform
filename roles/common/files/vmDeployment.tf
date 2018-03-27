@@ -109,7 +109,7 @@ resource "azurerm_virtual_network" "network1" {
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers         = ["${var.virtualNetworkDnsServer1}, ${var.virtualNetworkDnsServer2}"]
+  dns_servers         = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 }
 
 # Create subnet
