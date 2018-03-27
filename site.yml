@@ -1,1 +1,4 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
 - include_tasks: roles/common/tasks/vmPrerequisites.yml
