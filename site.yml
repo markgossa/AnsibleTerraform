@@ -1,0 +1,6 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+
+- name: Include vmDeployment.yml
+  import_playbook: roles/common/tasks/vmDeployment.yml
