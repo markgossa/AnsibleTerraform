@@ -8,6 +8,9 @@
     - name: Run terraform init
       command: "terraform init ../files"
 
+    - name: Run terraform refresh
+      command: "terraform refresh ../files"
+
     - name: Run terraform plan
       command: "terraform plan
       -out=terraformplan 
