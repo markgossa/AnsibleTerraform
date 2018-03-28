@@ -128,6 +128,8 @@ resource "azurerm_storage_account" "storage" {
   account_tier              = "${var.storageAccountTier}"
   account_replication_type  = "${var.storageAccountReplicationType}"
   name                      = "${var.storageAccountName}"
+  enable_blob_encryption    = "True"
+  enable_file_encryption    = "True"
 }
 
 # VM 1 - Create NIC
@@ -146,7 +148,7 @@ resource "azurerm_network_interface" "vm1" {
 
 # VM 1 - Create public IP
 resource "azurerm_public_ip" "vm1" {
-  name                         = "${var.vm1Name}-Public IP"
+  name                         = "${var.vm1Name}-public-ip"
   location                     = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name          = "${azurerm_resource_group.resourceGroup1.name}"
   public_ip_address_allocation = "Dynamic"
