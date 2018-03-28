@@ -9,7 +9,12 @@
       command: "terraform init ../files"
 
     - name: Run terraform refresh
-      command: "terraform refresh ../files"
+      command: "terraform refresh 
+      -var subscription_id='{{ subscription_id }}' 
+      -var client_id='{{ client_id }}'
+      -var tenant_id='{{ tenant_id }}'
+      -var client_secret='{{ client_secret }}'
+      ../files"
 
     - name: Run terraform plan
       command: "terraform plan
