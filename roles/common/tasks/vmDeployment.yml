@@ -8,6 +8,9 @@
     - name: Run terraform init
       command: terraform init ../files
 
+    - name: Run terraform init
+      command: terraform plan ../files      
+
     - name: Run terraform apply
       command: "terraform apply 
       -auto-approve 
