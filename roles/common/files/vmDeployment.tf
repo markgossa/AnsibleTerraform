@@ -25,6 +25,7 @@ variable "resourceGroupLocation" {
 variable "virtualNetworkName" {
     type = "string"
 }
+
 variable "virtualNetworkAddressSpace" {
     type = "string"
 }
@@ -141,6 +142,16 @@ resource "azurerm_network_interface" "vm1" {
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.vm1IPAddress}"
   }
+}
+
+# VM 1 - Create public IP
+resource "azurerm_public_ip" "vm1" {
+  name                         = "${var.vm1Name}-Public IP"
+  location                     = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name          = "${azurerm_resource_group.resourceGroup1.name}"
+  public_ip_address_allocation = "Dynamic"
+  idle_timeout_in_minutes      = 30
+  domain_name_label            = "${var.vm1Name}-azurevm"
 }
 
 # VM 1 - Create VM
