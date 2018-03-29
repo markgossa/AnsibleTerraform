@@ -8,7 +8,7 @@
     - name: Run terraform apply
       terraform:
         project_path: "../files"
-        force_init: yes
+        force_init: true
         state_file: "/var/lib/terraform/terraform.tfstate"
         state: present
         variables:
