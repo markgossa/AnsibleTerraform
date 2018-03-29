@@ -5,7 +5,8 @@
       include_vars:
         file: "../vars/vmDeploymentVars.yml"
 
-    - terraform:
+    - name: Run terraform configuration
+      terraform:
         project_path: "../files"
         state_file: "/var/lib/terraform/terraform.tfstate"
         state: present
