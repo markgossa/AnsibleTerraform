@@ -143,6 +143,7 @@ resource "azurerm_network_interface" "vm1" {
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.vm1IPAddress}"
+    public_ip_address_id          = "${azurerm_public_ip.vm1.id}"
   }
 }
 
