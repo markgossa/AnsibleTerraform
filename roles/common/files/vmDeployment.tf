@@ -192,7 +192,7 @@ resource "azurerm_virtual_machine" "vm1" {
 
 # VM 1 - Create VM extension to configure Ansible remoting
 resource "azurerm_virtual_machine_extension" "vm1" {
-  name                       = "ConfigureRemotingForAnsible"
+  name                       = "ConfigureRemotingForAnsible.ps1"
   location                   = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
   virtual_machine_name       = "${var.vm1Name}"
