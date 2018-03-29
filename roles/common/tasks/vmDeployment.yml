@@ -35,4 +35,4 @@
       -var vmUserName='{{ vmUserName }}'
       -var vmPassword='{{ vmPassword }}'
       -var vmSku='{{ vmSku }}'
-      ../files""
+      ../files"
