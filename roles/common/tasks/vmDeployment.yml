@@ -3,14 +3,15 @@
   tasks:
     - name: Import variables from vmPrerequisitesVars.yml
       include_vars:
-        file: '../vars/vmDeploymentVars.yml'
+        file: "../vars/vmDeploymentVars.yml"
 
     - name: Run terraform init
-      command: terraform init ../files
+      command: "terraform init ../files"
 
     - name: Run terraform apply
-      command: "terraform apply 
-      -auto-approve 
+      command: "terraform apply
+      -state=/var/lib/terraform/terraform.tfstate
+      -auto-approve
       -var subscription_id='{{ subscription_id }}' 
       -var client_id='{{ client_id }}'
       -var tenant_id='{{ tenant_id }}'
