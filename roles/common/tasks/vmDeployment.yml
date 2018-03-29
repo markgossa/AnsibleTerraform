@@ -7,10 +7,11 @@
 
     - name: Run terraform init
       command: "terraform init ../files"
-
-    - name: Run terraform plan
-      command: "terraform plan
-      -out=terraformplan 
+      
+    - name: Run terraform apply
+      command: "terraform apply
+      -state=/var/lib/terraform/terraform.tfstate
+      -auto-approve
       -state=/var/lib/terraform/terraform.tfstate
       -var subscription_id='{{ subscription_id }}' 
       -var client_id='{{ client_id }}'
@@ -35,9 +36,4 @@
       -var vmUserName='{{ vmUserName }}'
       -var vmPassword='{{ vmPassword }}'
       -var vmSku='{{ vmSku }}'
-      ../files"
-
-    - name: Run terraform apply
-      command: "terraform apply
-      -state=/var/lib/terraform/terraform.tfstate
-      -auto-approve terraformplan"
+      ../files""
