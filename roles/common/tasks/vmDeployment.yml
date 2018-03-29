@@ -5,11 +5,12 @@
       include_vars:
         file: "../vars/vmDeploymentVars.yml"
 
-- terraform:
-  project_path: "../files"
-  state_file: "/var/lib/terraform/terraform.tfstate"
-  variables:
-    subscription_id: '{{ subscription_id }}' 
-    client_id: '{{ client_id }}'
-    tenant_id: '{{ tenant_id }}'
-    client_secret: '{{ client_secret }}'
+    - name: Run terraform configuration
+      terraform:
+          project_path: "../files"
+          state_file: "/var/lib/terraform/terraform.tfstate"
+          variables:
+            subscription_id: '{{ subscription_id }}' 
+            client_id: '{{ client_id }}'
+            tenant_id: '{{ tenant_id }}'
+            client_secret: '{{ client_secret }}'
