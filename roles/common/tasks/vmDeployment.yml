@@ -5,14 +5,16 @@
       include_vars:
         file: "../vars/vmDeploymentVars.yml"
 
+    - name: Run terraform init
+      command: "terraform init ../files"
+      
     - name: Run terraform apply
       terraform:
         project_path: "../files"
-        force_init: true
         state_file: "/var/lib/terraform/terraform.tfstate"
         state: present
         variables:
           subscription_id: '{{ subscription_id }}' 
-          client_id: '{{ client_id }}'
+          client_id: '{{ client_id }}''
           tenant_id: '{{ tenant_id }}'
           client_secret: '{{ client_secret }}'
