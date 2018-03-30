@@ -200,7 +200,7 @@ resource "azurerm_virtual_machine_extension" "vm1" {
   name                       = "ConfigureRemotingForAnsible"
   location                   = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
-  virtual_machine_name       = "${var.vm1Name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.vm1.name}"
   publisher                  = "Microsoft.Compute"
   type                       = "CustomScriptExtension"
   type_handler_version       = "1.7"
