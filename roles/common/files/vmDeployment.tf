@@ -164,6 +164,7 @@ resource "azurerm_virtual_machine" "vm1" {
   resource_group_name   = "${azurerm_resource_group.resourceGroup1.name}"
   network_interface_ids = ["${azurerm_network_interface.vm1.id}"]
   vm_size               = "${var.vm1Size}"
+  boot_diagnostics      = 
   
   storage_os_disk {
     name                = "${var.vm1Name}-OS"
@@ -192,7 +193,7 @@ resource "azurerm_virtual_machine" "vm1" {
 
 # VM 1 - Create VM extension to configure Ansible remoting
 resource "azurerm_virtual_machine_extension" "vm1" {
-  name                       = "ConfigureRemotingForAnsible.ps1"
+  name                       = "Run ConfigureRemotingForAnsible.ps1"
   location                   = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
   virtual_machine_name       = "${var.vm1Name}"
@@ -202,7 +203,7 @@ resource "azurerm_virtual_machine_extension" "vm1" {
   auto_upgrade_minor_version =  true
   settings = <<SETTINGS
     {
-        "fileUris": "[https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1]"
+        "fileUris": "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
     }
   SETTINGS
   protected_settings = <<PROTECTED_SETTINGS
