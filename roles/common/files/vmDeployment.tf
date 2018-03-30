@@ -90,6 +90,10 @@ variable "vm1IPAddress" {
     type = "string"
 }
 
+variable "configureRemotingForAnsibleScript" {
+    type = "string"
+}
+
 # Configure the Azure Provider
 provider "azurerm" { 
   subscription_id   = "${var.subscription_id}"
@@ -185,9 +189,10 @@ resource "azurerm_virtual_machine" "vm1" {
   }
 
   os_profile {
-    computer_name  = "${var.vm1Name}"
-    admin_username = "${var.vmUserName}"
-    admin_password = "${var.vmPassword}"
+    computer_name       = "${var.vm1Name}"
+    admin_username      = "${var.vmUserName}"
+    admin_password      = "${var.vmPassword}"
+    provision_vm_agent  = "True"
   }
 }
 
