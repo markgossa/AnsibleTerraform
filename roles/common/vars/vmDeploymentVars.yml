@@ -14,7 +14,7 @@ vm1IPAddress: 10.0.0.11
 vm1Size: Standard_DS1_v2
 vm1DiskCaching: ReadWrite
 vm1ManagedDiskType: Standard_LRS
-vmSku: 2016-Datacenter
+vmOffer: WindowsServerSemiAnnual
+vmSku: Datacenter-Core-1709-smalldisk
 vmUserName: azureadmin
 vmPassword: AzurePassword1
-configureRemotingForAnsibleScript: https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1

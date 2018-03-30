@@ -94,6 +94,10 @@ variable "configureRemotingForAnsibleScript" {
     type = "string"
 }
 
+variable "vmOffer" {
+    type = "string"
+}
+
 # Configure the Azure Provider
 provider "azurerm" { 
   subscription_id   = "${var.subscription_id}"
@@ -179,7 +183,7 @@ resource "azurerm_virtual_machine" "vm1" {
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
+    offer     = "${var.vmOffer}"
     sku       = "${var.vmSku}"
     version   = "latest"
   }
@@ -193,26 +197,4 @@ resource "azurerm_virtual_machine" "vm1" {
     admin_username      = "${var.vmUserName}"
     admin_password      = "${var.vmPassword}"
   }
-}
-
-# VM 1 - Create VM extension to configure Ansible remoting
-resource "azurerm_virtual_machine_extension" "vm1" {
-  name                       = "ConfigureRemotingForAnsible"
-  location                   = "${azurerm_resource_group.resourceGroup1.location}"
-  resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
-  virtual_machine_name       = "${azurerm_virtual_machine.vm1.name}"
-  publisher                  = "Microsoft.Compute"
-  type                       = "CustomScriptExtension"
-  type_handler_version       = "1.7"
-  auto_upgrade_minor_version =  true
-  settings = <<SETTINGS
-    {
-        "fileUris": "${var.configureRemotingForAnsibleScript}"
-    }
-  SETTINGS
-  protected_settings = <<PROTECTED_SETTINGS
-    {
-        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1 -SkipNetworkProfileCheck -EnableCredSSP"
-    }
-  PROTECTED_SETTINGS
 }

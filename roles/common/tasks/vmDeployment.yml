@@ -35,5 +35,5 @@
       -var vmUserName='{{ vmUserName }}'
       -var vmPassword='{{ vmPassword }}'
       -var vmSku='{{ vmSku }}'
-      -var configureRemotingForAnsibleScript='{{ configureRemotingForAnsibleScript }}'
+      -var vmOffer='{{ vmOffer }}'
       ../files"
