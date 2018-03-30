@@ -164,7 +164,6 @@ resource "azurerm_virtual_machine" "vm1" {
   resource_group_name   = "${azurerm_resource_group.resourceGroup1.name}"
   network_interface_ids = ["${azurerm_network_interface.vm1.id}"]
   vm_size               = "${var.vm1Size}"
-  boot_diagnostics      = 
   
   storage_os_disk {
     name                = "${var.vm1Name}-OS"
