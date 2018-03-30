@@ -17,3 +17,4 @@ vm1ManagedDiskType: Standard_LRS
 vmSku: 2016-Datacenter
 vmUserName: azureadmin
 vmPassword: AzurePassword1
+configureRemotingForAnsibleScript: https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1
