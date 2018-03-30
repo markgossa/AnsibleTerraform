@@ -90,10 +90,6 @@ variable "vm1IPAddress" {
     type = "string"
 }
 
-variable "configureRemotingForAnsibleScript" {
-    type = "string"
-}
-
 variable "vmOffer" {
     type = "string"
 }
