@@ -166,10 +166,11 @@ resource "azurerm_virtual_machine" "vm1" {
   vm_size               = "${var.vm1Size}"
   
   storage_os_disk {
-    name                = "${var.vm1Name}-OS"
+    name                = "${var.vm1Name}-C"
     caching             = "${var.vm1DiskCaching}"
     create_option       = "FromImage"
     managed_disk_type   = "${var.vm1ManagedDiskType}"
+    disk_size_gb        = "40"
   }
 
   storage_image_reference {
@@ -192,7 +193,7 @@ resource "azurerm_virtual_machine" "vm1" {
 
 # VM 1 - Create VM extension to configure Ansible remoting
 resource "azurerm_virtual_machine_extension" "vm1" {
-  name                       = "Run ConfigureRemotingForAnsible.ps1"
+  name                       = "ConfigureRemotingForAnsible"
   location                   = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
   virtual_machine_name       = "${var.vm1Name}"
