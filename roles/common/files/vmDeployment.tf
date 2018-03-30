@@ -170,7 +170,7 @@ resource "azurerm_virtual_machine" "vm1" {
     caching             = "${var.vm1DiskCaching}"
     create_option       = "FromImage"
     managed_disk_type   = "${var.vm1ManagedDiskType}"
-    disk_size_gb        = "40"
+    disk_size_gb        = "128"
   }
 
   storage_image_reference {
