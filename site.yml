@@ -2,5 +2,5 @@
   gather_facts: no
   tasks:
 
-- name: Run dc1Infrastructure.yml to prepare infra for first DC
-  import_playbook: roles/firstDomainController/tasks/main.yml
+- import_role:
+    name: firstDomainController
