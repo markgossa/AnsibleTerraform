@@ -21,8 +21,6 @@
       -var storageAccountName='{{ storageAccountName }}'
       -var virtualNetworkName='{{ virtualNetworkName }}'
       -var virtualNetworkAddressSpace='{{ virtualNetworkAddressSpace }}'
-      -var virtualNetworkDnsServer1='{{ virtualNetworkDnsServer1 }}'
-      -var virtualNetworkDnsServer2='{{ virtualNetworkDnsServer2 }}'
       -var subnetName='{{ subnetName }}'
       -var subnetNetworkID='{{ subnetNetworkID }}'
       -var storageAccountTier='{{ storageAccountTier }}'

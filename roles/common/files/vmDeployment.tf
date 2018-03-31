@@ -30,14 +30,6 @@ variable "virtualNetworkAddressSpace" {
     type = "string"
 }
 
-variable "virtualNetworkDnsServer1" {
-    type = "string"
-}
-
-variable "virtualNetworkDnsServer2" {
-    type = "string"
-}
-
 variable "subnetName" {
     type = "string"
 }
