@@ -3,11 +3,10 @@
   tasks:
 
 - name: Import inventory
-  include_vars: 
-    file: production.yml
+  import_playbook: production.yml
 
 - name: Run dc1Infrastructure.yml to prepare infra for first DC
-  import_tasks: roles/domainControllers/tasks/dc1Infrastructure.yml
+  import_playbook: roles/domainControllers/tasks/dc1Infrastructure.yml
 
 #- hosts: DomainControllers[0]
 
