@@ -2,9 +2,6 @@
   gather_facts: no
   tasks:
 
-- name: Import inventory
-  import_playbook: production.yml
-
 - name: Run dc1Infrastructure.yml to prepare infra for first DC
   import_playbook: roles/domainControllers/tasks/dc1Infrastructure.yml
 
