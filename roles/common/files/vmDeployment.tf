@@ -119,14 +119,16 @@ resource "azurerm_virtual_network" "network1" {
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
+  dns_servers         = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 }
 
 # Create subnet
 resource azurerm_subnet "subnet1" {
-    name                    = "${var.subnetName}"
-    address_prefix          = "${var.subnetNetworkID}"
-    resource_group_name     = "${azurerm_resource_group.resourceGroup1.name}"
-    virtual_network_name    = "${azurerm_virtual_network.network1.name}"
+  name                    = "${var.subnetName}"
+  address_prefix          = "${var.subnetNetworkID}"
+  resource_group_name     = "${azurerm_resource_group.resourceGroup1.name}"
+  virtual_network_name    = "${azurerm_virtual_network.network1.name}"
+  network_security_group_id = "${azurerm_network_security_group.nsg1.id}"
 }
 
 # Create a storage account
@@ -154,6 +156,7 @@ resource "azurerm_network_security_group" "nsg1" {
       direction                 = "inbound"
       access                    = "allow"
       priority                  = "101"
+      source_port_range         = "*"
   }
 
   security_rule {
@@ -164,6 +167,7 @@ resource "azurerm_network_security_group" "nsg1" {
       direction                 = "inbound"
       access                    = "allow"
       priority                  = "102"
+      source_port_range         = "*"
   }
 }
 
@@ -172,7 +176,7 @@ resource "azurerm_network_interface" "vm1" {
   name                      = "nic1"
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg1.id}"
+  dns_servers               = "8.8.8.8"
 
   ip_configuration {
     name                          = "ipconfig1"
@@ -250,11 +254,18 @@ resource "azurerm_virtual_machine_extension" "vm1" {
 }
 
 # Modify DNS servers on virtual network
-resource "azurerm_virtual_network" "network1-update" {
-  name                = "${var.virtualNetworkName}"
-  address_space       = ["${var.virtualNetworkAddressSpace}"]
-  location            = "${azurerm_resource_group.resourceGroup1.location}"
-  resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers         = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
+resource "azurerm_network_interface" "vm1" {
+  name                      = "nic1"
+  location                  = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
+
+  ip_configuration {
+    name                          = "ipconfig1"
+    subnet_id                     = "${azurerm_subnet.subnet1.id}"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "${var.vm1IPAddress}"
+    public_ip_address_id          = "${azurerm_public_ip.vm1.id}"
+  }
+
   depends_on          = ["azurerm_virtual_machine_extension.vm1"]
 }
