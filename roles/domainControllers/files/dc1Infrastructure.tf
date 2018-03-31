@@ -175,7 +175,7 @@ resource "azurerm_network_security_group" "nsg1" {
 
 # VM 1 - Create NIC
 resource "azurerm_network_interface" "dc1" {
-  name                      = "nic1"
+  name                      = "${var.dc1Name}-nic1"
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
   dns_servers               = ["8.8.8.8"]

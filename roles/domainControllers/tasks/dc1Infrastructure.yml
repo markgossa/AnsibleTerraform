@@ -7,7 +7,7 @@
 
     - name: Run terraform apply
       command: "terraform apply
-      -state=/var/lib/terraform/terraform.tfstate
+      -state=/var/lib/terraform/terraform-'{{ resourceGroupName }}'.tfstate
       -auto-approve
       -var subscription_id='{{ subscription_id }}' 
       -var client_id='{{ client_id }}'
