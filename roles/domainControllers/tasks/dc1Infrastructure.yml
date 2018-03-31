@@ -24,7 +24,7 @@
       -var subnetNetworkID='{{ subnetNetworkID }}'
       -var storageAccountTier='{{ storageAccountTier }}'
       -var storageAccountReplicationType='{{ storageAccountReplicationType }}'
-      -var dc1Name='{{ hosts: DomainControllers[0] }}'
+      -var dc1Name='{{ dc1Name }}'
       -var dc1IPAddress='{{ dc1IPAddress }}'
       -var dc1Size='{{ dc1Size }}'
       -var dc1DiskCaching='{{ dc1DiskCaching }}'
