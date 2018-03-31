@@ -36,4 +36,5 @@
       -var vmPassword='{{ vmPassword }}'
       -var vmSku='{{ vmSku }}'
       -var vmOffer='{{ vmOffer }}'
+      -var managementIP='{{ managementIP }}'
       ../files"
