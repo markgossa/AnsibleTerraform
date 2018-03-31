@@ -214,6 +214,6 @@ resource "azurerm_virtual_network" "network1-update" {
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers         = ["${azurerm_network_interface.ip_configuration.private_ip_address}"]
+  dns_servers         = ["${azurerm_network_interface.vm1.ip_configuration.private_ip_address}"]
   depends_on          = ["azurerm_virtual_machine_extension.vm1"]
 }
