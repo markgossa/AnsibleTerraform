@@ -18,4 +18,3 @@ vmOffer: WindowsServerSemiAnnual
 vmSku: Datacenter-Core-1709-smalldisk
 vmUserName: azureadmin
 vmPassword: AzurePassword1
-managementIP: 82.15.189.171/32
