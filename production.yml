@@ -3,6 +3,7 @@ all:
     AnsibleServers:
       localhost:
       vars:
+        ansible_connection:local
         resourceGroupName:AnsibleTerraform-Contoso
         resourceGroupLocation:EastUS
         storageAccountName:storageacc79ruds778
