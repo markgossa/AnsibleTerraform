@@ -22,7 +22,16 @@ variable "resourceGroupName" {
 variable "resourceGroupLocation" {
     type = "string"
 }
+
 variable "virtualNetworkName" {
+    type = "string"
+}
+
+variable "virtualNetworkDnsServer1" {
+    type = "string"
+}
+
+variable "virtualNetworkDnsServer2" {
     type = "string"
 }
 
@@ -214,6 +223,6 @@ resource "azurerm_virtual_network" "network1-update" {
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers         = ["${azurerm_network_interface.vm1.ip_configuration.private_ip_address}"]
+  dns_servers         = ["${var.virtualNetworkDnsServer1","${var.virtualNetworkDnsServer2}"]
   depends_on          = ["azurerm_virtual_machine_extension.vm1"]
 }
