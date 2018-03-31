@@ -149,25 +149,27 @@ resource "azurerm_network_security_group" "nsg1" {
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
 
   security_rule {
-      name                      = "RDP"
-      protocol                  = "TCP"
-      destination_port_range    = "3389"
-      source_address_prefix     = "${var.managementIP}"
-      direction                 = "inbound"
-      access                    = "allow"
-      priority                  = "101"
-      source_port_range         = "*"
+      name                          = "RDP"
+      protocol                      = "TCP"
+      destination_port_range        = "3389"
+      destination_address_prefix    = "${var.subnetNetworkID}"
+      source_address_prefix         = "${var.managementIP}"
+      direction                     = "inbound"
+      access                        = "allow"
+      priority                      = "101"
+      source_port_range             = "*"
   }
 
   security_rule {
-      name                      = "WinRM"
-      protocol                  = "TCP"
-      destination_port_range    = "5986"
-      source_address_prefix     = "${var.managementIP}"
-      direction                 = "inbound"
-      access                    = "allow"
-      priority                  = "102"
-      source_port_range         = "*"
+      name                          = "WinRM"
+      protocol                      = "TCP"
+      destination_port_range        = "5986"
+      destination_address_prefix    = "${var.subnetNetworkID}"
+      source_address_prefix         = "${var.managementIP}"
+      direction                     = "inbound"
+      access                        = "allow"
+      priority                      = "102"
+      source_port_range             = "*"
   }
 }
 
