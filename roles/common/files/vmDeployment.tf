@@ -144,12 +144,14 @@ resource "azurerm_storage_account" "storage" {
 resource "azurerm_network_security_group" "nsg1" {
   name                      = "nsg1"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
+  location                  = "${azurerm_resource_group.resourceGroup1.location}"
 
   security_rule {
       name                      = "RDP"
       protocol                  = "TCP"
       destination_port_range    = "3389"
       source_address_prefix     = "${var.managementIP}"
+      direction                 = "inbound"
   }
 
   security_rule {
@@ -157,6 +159,7 @@ resource "azurerm_network_security_group" "nsg1" {
       protocol                  = "TCP"
       destination_port_range    = "5986"
       source_address_prefix     = "${var.managementIP}"
+      direction                 = "inbound"
   }
 }
 
