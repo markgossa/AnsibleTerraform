@@ -1,0 +1,11 @@
+- hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Run dc1Infrastructure.yml to prepare infra for first DC
+    import_playbook: roles/firstDomainController/tasks/dc1Infrastructure.yml
+
+- hosts: DomainControllers[0]
+  gather_facts: no
+  tasks:
+  - name: Run dc1Configuration.yml to prepare infra for first DC
+    import_playbook: roles/common/tasks/dc1Configuration.yml

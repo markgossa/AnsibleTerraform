@@ -185,7 +185,6 @@ resource "azurerm_network_interface" "dc1" {
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.dc1IPAddress}"
-    public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
   }
 }
 
@@ -208,7 +207,7 @@ resource "azurerm_virtual_machine" "dc1" {
   vm_size               = "${var.dc1Size}"
   
   storage_os_disk {
-    name                = "${var.dc1Name}-C"
+    name                = "${var.dc1Name}-c"
     caching             = "${var.dc1DiskCaching}"
     create_option       = "FromImage"
     managed_disk_type   = "${var.dc1ManagedDiskType}"
