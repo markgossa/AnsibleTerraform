@@ -198,7 +198,7 @@ resource "azurerm_virtual_machine_extension" "vm1" {
   auto_upgrade_minor_version =  true
   settings = <<SETTINGS
     {
-        "fileUris": ["https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"],
+        "fileUris": ["https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"]
     }
   SETTINGS
   protected_settings = <<PROTECTED_SETTINGS
