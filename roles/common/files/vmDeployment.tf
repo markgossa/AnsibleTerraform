@@ -152,6 +152,8 @@ resource "azurerm_network_security_group" "nsg1" {
       destination_port_range    = "3389"
       source_address_prefix     = "${var.managementIP}"
       direction                 = "inbound"
+      access                    = "allow"
+      priority                  = "101"
   }
 
   security_rule {
@@ -160,6 +162,8 @@ resource "azurerm_network_security_group" "nsg1" {
       destination_port_range    = "5986"
       source_address_prefix     = "${var.managementIP}"
       direction                 = "inbound"
+      access                    = "allow"
+      priority                  = "102"
   }
 }
 
