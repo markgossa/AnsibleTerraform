@@ -1,6 +1,5 @@
 - hosts: localhost
   gather_facts: no
-  tasks:
 
 - name: Run dc1Infrastructure.yml to prepare infra for first DC
   import_playbook: dc1Infrastructure.yml
