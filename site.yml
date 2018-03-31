@@ -2,12 +2,12 @@
   gather_facts: no
   tasks:
 
-  - name: Import inventory
-    include_vars: 
-      file: production.yml
+- name: Import inventory
+  include_vars: 
+    file: production.yml
 
-  - name: Run dc1Infrastructure.yml to prepare infra for first DC
-    import_tasks: roles/domainControllers/tasks/dc1Infrastructure.yml
+- name: Run dc1Infrastructure.yml to prepare infra for first DC
+  import_tasks: roles/domainControllers/tasks/dc1Infrastructure.yml
 
 #- hosts: DomainControllers[0]
 
