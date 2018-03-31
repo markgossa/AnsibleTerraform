@@ -5,5 +5,5 @@
 - name: Run dc1Infrastructure.yml to prepare infra for first DC
   import_playbook: roles/firstDomainController/tasks/dc1Infrastructure.yml
 
-- name: Run dc1Configuration.yml to prepare infra for first DC
-  import_playbook: roles/common/tasks/dc1Configuration.yml
+#- name: Run dc1Configuration.yml to prepare infra for first DC
+#  import_playbook: roles/common/tasks/dc1Configuration.yml
