@@ -35,5 +35,5 @@ all:
         ansible_connection:winrm
         ansible_winrm_server_cert_validation:ignore
         ansible_winrm_transport:credssp
-        ansible_user:Adatum\AzureAdmin
+        ansible_user:Contoso\AzureAdmin
         ansible_password:AzurePassword1
