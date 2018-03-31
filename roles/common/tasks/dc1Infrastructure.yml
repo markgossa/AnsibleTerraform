@@ -1,9 +1,6 @@
 - hosts: localhost
   gather_facts: no
   tasks:
-    - name: Import variables from vmPrerequisitesVars.yml
-      include_vars:
-        file: "../vars/vmDeploymentVars.yml"
 
     - name: Run terraform init
       command: "terraform init ../files"
@@ -27,11 +24,11 @@
       -var subnetNetworkID='{{ subnetNetworkID }}'
       -var storageAccountTier='{{ storageAccountTier }}'
       -var storageAccountReplicationType='{{ storageAccountReplicationType }}'
-      -var vm1Name='{{ vm1Name }}'
-      -var vm1IPAddress='{{ vm1IPAddress }}'
-      -var vm1Size='{{ vm1Size }}'
-      -var vm1DiskCaching='{{ vm1DiskCaching }}'
-      -var vm1ManagedDiskType='{{ vm1ManagedDiskType }}'
+      -var dc1Name='{{ hosts: DomainControllers[0] }}'
+      -var dc1IPAddress='{{ dc1IPAddress }}'
+      -var dc1Size='{{ dc1Size }}'
+      -var dc1DiskCaching='{{ dc1DiskCaching }}'
+      -var dc1ManagedDiskType='{{ dc1ManagedDiskType }}'
       -var vmUserName='{{ vmUserName }}'
       -var vmPassword='{{ vmPassword }}'
       -var vmSku='{{ vmSku }}'

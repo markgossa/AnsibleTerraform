@@ -1,18 +1,39 @@
-[Windows:children]
-DomainControllers
-WebServers
-
-[DomainControllers]
-prod-dc01
-prod-dc02
-
-[WebServers]
-prod-web01
-prod-web02
-
-[Windows:vars]
-ansible_connection=winrm
-ansible_winrm_server_cert_validation=ignore
-ansible_winrm_transport=credssp
-ansible_user=Adatum\Administrator
-ansible_password=Password1
+all:
+  children:
+    AnsibleServers:
+      localhost:
+      vars:
+        resourceGroupName:AnsibleTerraform-Contoso
+        resourceGroupLocation:EastUS
+        storageAccountName:storageacc79ruds778
+        virtualNetworkName:vmnetwork
+        virtualNetworkAddressSpace:10.0.0.0/8
+        virtualNetworkDnsServer1:10.0.0.11
+        virtualNetworkDnsServer2:10.0.0.12
+        subnetName:lan
+        subnetNetworkID:10.0.0.0/24
+        storageAccountTier:Standard
+        storageAccountReplicationType:LRS
+        dc1Name:contdc01
+        dc1IPAddress:10.0.0.11
+        dc1Size:Standard_DS1_v2
+        dc1DiskCaching:Read
+        dc1ManagedDiskType:Standard_LRS
+        vmOffer:WindowsServerSemiAnnual
+        vmSku:Datacenter-Core-1709-smalldisk
+        vmUserName:AzureAdmin
+        vmPassword:AzurePassword1
+    Windows:
+      children:
+        DomainControllers:
+          contdc01-azurevm.eastus.cloudapp.azure.com:
+          contdc02-azurevm.eastus.cloudapp.azure.com:
+        WebServers:
+          contweb01-azurevm.eastus.cloudapp.azure.com:
+          contweb02-azurevm.eastus.cloudapp.azure.com:
+      vars:
+        ansible_connection:winrm
+        ansible_winrm_server_cert_validation:ignore
+        ansible_winrm_transport:credssp
+        ansible_user:Adatum\AzureAdmin
+        ansible_password:AzurePassword1

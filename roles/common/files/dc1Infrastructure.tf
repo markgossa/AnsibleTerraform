@@ -59,19 +59,19 @@ variable "storageAccountName" {
     type = "string"
 }
 
-variable "vm1Name" {
+variable "dc1Name" {
     type = "string"
 }
 
-variable "vm1Size" {
+variable "dc1Size" {
     type = "string"
 }
 
-variable "vm1DiskCaching" {
+variable "dc1DiskCaching" {
     type = "string"
 }
 
-variable "vm1ManagedDiskType" {
+variable "dc1ManagedDiskType" {
     type = "string"
 }
 
@@ -87,7 +87,7 @@ variable "vmSku" {
     type = "string"
 }
 
-variable "vm1IPAddress" {
+variable "dc1IPAddress" {
     type = "string"
 }
 
@@ -174,7 +174,7 @@ resource "azurerm_network_security_group" "nsg1" {
 }
 
 # VM 1 - Create NIC
-resource "azurerm_network_interface" "vm1" {
+resource "azurerm_network_interface" "dc1" {
   name                      = "nic1"
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
@@ -184,34 +184,34 @@ resource "azurerm_network_interface" "vm1" {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${var.vm1IPAddress}"
-    public_ip_address_id          = "${azurerm_public_ip.vm1.id}"
+    private_ip_address            = "${var.dc1IPAddress}"
+    public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
   }
 }
 
 # VM 1 - Create public IP
-resource "azurerm_public_ip" "vm1" {
-  name                         = "${var.vm1Name}-public-ip"
+resource "azurerm_public_ip" "dc1" {
+  name                         = "${var.dc1Name}-public-ip"
   location                     = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name          = "${azurerm_resource_group.resourceGroup1.name}"
   public_ip_address_allocation = "Dynamic"
   idle_timeout_in_minutes      = 30
-  domain_name_label            = "${var.vm1Name}-azurevm"
+  domain_name_label            = "${var.dc1Name}-azurevm"
 }
 
 # VM 1 - Create VM
-resource "azurerm_virtual_machine" "vm1" {
-  name                  = "${var.vm1Name}"
+resource "azurerm_virtual_machine" "dc1" {
+  name                  = "${var.dc1Name}"
   location              = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name   = "${azurerm_resource_group.resourceGroup1.name}"
-  network_interface_ids = ["${azurerm_network_interface.vm1.id}"]
-  vm_size               = "${var.vm1Size}"
+  network_interface_ids = ["${azurerm_network_interface.dc1.id}"]
+  vm_size               = "${var.dc1Size}"
   
   storage_os_disk {
-    name                = "${var.vm1Name}-C"
-    caching             = "${var.vm1DiskCaching}"
+    name                = "${var.dc1Name}-C"
+    caching             = "${var.dc1DiskCaching}"
     create_option       = "FromImage"
-    managed_disk_type   = "${var.vm1ManagedDiskType}"
+    managed_disk_type   = "${var.dc1ManagedDiskType}"
     disk_size_gb        = "128"
   }
 
@@ -227,18 +227,18 @@ resource "azurerm_virtual_machine" "vm1" {
   }
 
   os_profile {
-    computer_name       = "${var.vm1Name}"
+    computer_name       = "${var.dc1Name}"
     admin_username      = "${var.vmUserName}"
     admin_password      = "${var.vmPassword}"
   }
 }
 
 # VM 1 - Create VM extension to configure Ansible remoting
-resource "azurerm_virtual_machine_extension" "vm1" {
+resource "azurerm_virtual_machine_extension" "dc1" {
   name                       = "ConfigureRemotingForAnsible"
   location                   = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
-  virtual_machine_name       = "${azurerm_virtual_machine.vm1.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.dc1.name}"
   publisher                  = "Microsoft.Compute"
   type                       = "CustomScriptExtension"
   type_handler_version       = "1.7"
@@ -256,7 +256,7 @@ resource "azurerm_virtual_machine_extension" "vm1" {
 }
 
 # Modify DNS servers on virtual network
-resource "azurerm_network_interface" "vm1-update" {
+resource "azurerm_network_interface" "dc1-update" {
   name                      = "nic1"
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
@@ -266,9 +266,9 @@ resource "azurerm_network_interface" "vm1-update" {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${var.vm1IPAddress}"
-    public_ip_address_id          = "${azurerm_public_ip.vm1.id}"
+    private_ip_address            = "${var.dc1IPAddress}"
+    public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
   }
 
-  depends_on          = ["azurerm_virtual_machine_extension.vm1"]
+  depends_on          = ["azurerm_virtual_machine_extension.dc1"]
 }
