@@ -209,7 +209,7 @@ resource "azurerm_virtual_machine_extension" "vm1" {
 }
 
 # Modify DNS servers on virtual network
-resource "azurerm_virtual_network" "network1" {
+resource "azurerm_virtual_network" "network1-update" {
   name                = "${var.virtualNetworkName}"
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
