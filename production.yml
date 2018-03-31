@@ -29,6 +29,12 @@ all:
         DomainControllers:
           contdc01-azurevm.eastus.cloudapp.azure.com:
           contdc02-azurevm.eastus.cloudapp.azure.com:
+        vars:
+          domain_name:contoso.com
+          SafemodeAdministratorPassword_username:AzureAdmin
+          SafemodeAdministratorPassword_password:AzurePassword1
+          DomainAdministratorCredential_username:AzureAdmin
+          DomainAdministratorCredential_password:AzurePassword1
         WebServers:
           contweb01-azurevm.eastus.cloudapp.azure.com:
           contweb02-azurevm.eastus.cloudapp.azure.com:
