@@ -18,7 +18,7 @@ all:
         dc1Name:contdc01
         dc1IPAddress:10.0.0.11
         dc1Size:Standard_DS1_v2
-        dc1DiskCaching:Read
+        dc1DiskCaching:ReadOnly
         dc1ManagedDiskType:Standard_LRS
         vmOffer:WindowsServerSemiAnnual
         vmSku:Datacenter-Core-1709-smalldisk
