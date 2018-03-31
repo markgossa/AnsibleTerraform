@@ -176,7 +176,7 @@ resource "azurerm_network_interface" "vm1" {
   name                      = "nic1"
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers               = "8.8.8.8"
+  dns_servers               = ["8.8.8.8"]
 
   ip_configuration {
     name                          = "ipconfig1"
