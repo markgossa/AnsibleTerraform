@@ -30,4 +30,4 @@
   -var vmSku='{{ vmSku }}'
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
-  ../files"
+  roles/firstDomainControllerInfrastructure/files"
