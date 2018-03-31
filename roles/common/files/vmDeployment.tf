@@ -95,6 +95,10 @@ variable "vmOffer" {
     type = "string"
 }
 
+variable "managementIP" {
+    type = "string"
+}
+
 # Configure the Azure Provider
 provider "azurerm" { 
   subscription_id   = "${var.subscription_id}"
@@ -136,11 +140,32 @@ resource "azurerm_storage_account" "storage" {
   enable_file_encryption    = "True"
 }
 
+# Create network security group
+resource "azurerm_network_security_group" "nsg1" {
+  name                      = "nsg1"
+  resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
+
+  security_rule {
+      name                      = "RDP"
+      protocol                  = "TCP"
+      destination_port_range    = "3389"
+      source_address_prefix     = "${var.managementIP}"
+  }
+
+  security_rule {
+      name                      = "WinRM"
+      protocol                  = "TCP"
+      destination_port_range    = "5986"
+      source_address_prefix     = "${var.managementIP}"
+  }
+}
+
 # VM 1 - Create NIC
 resource "azurerm_network_interface" "vm1" {
-  name                = "nic1"
-  location            = "${azurerm_resource_group.resourceGroup1.location}"
-  resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
+  name                      = "nic1"
+  location                  = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
+  network_security_group_id = "${azurerm_network_security_group.id}"
 
   ip_configuration {
     name                          = "ipconfig1"
@@ -223,6 +248,6 @@ resource "azurerm_virtual_network" "network1-update" {
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers         = ["${var.virtualNetworkDnsServer1","${var.virtualNetworkDnsServer2}"]
+  dns_servers         = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
   depends_on          = ["azurerm_virtual_machine_extension.vm1"]
 }
