@@ -114,7 +114,6 @@ resource "azurerm_virtual_network" "network1" {
   address_space       = ["${var.virtualNetworkAddressSpace}"]
   location            = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
-  dns_servers         = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 }
 
 # Create subnet
@@ -193,4 +192,35 @@ resource "azurerm_virtual_machine" "vm1" {
     admin_username      = "${var.vmUserName}"
     admin_password      = "${var.vmPassword}"
   }
+}
+
+# VM 1 - Create VM extension to configure Ansible remoting
+resource "azurerm_virtual_machine_extension" "vm1" {
+  name                       = "ConfigureRemotingForAnsible"
+  location                   = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name        = "${azurerm_resource_group.resourceGroup1.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.vm1.name}"
+  publisher                  = "Microsoft.Compute"
+  type                       = "CustomScriptExtension"
+  type_handler_version       = "1.7"
+  auto_upgrade_minor_version =  true
+  settings = <<SETTINGS
+    {
+        "fileUris": ["https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"],
+    }
+  SETTINGS
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1 -SkipNetworkProfileCheck -EnableCredSSP"
+    }
+  PROTECTED_SETTINGS
+}
+
+# Modify DNS servers on virtual network
+resource "azurerm_virtual_network" "network1" {
+  name                = "${var.virtualNetworkName}"
+  address_space       = ["${var.virtualNetworkAddressSpace}"]
+  location            = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name = "${azurerm_resource_group.resourceGroup1.name}"
+  dns_servers         = ["${azurerm_virtual_machine.vm1.ip}"]
 }
