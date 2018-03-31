@@ -1,6 +1,4 @@
 - hosts: localhost
   gather_facts: no
-  tasks:
-
-- import_role:
-    name: firstDomainController
+  roles:
+  - firstDomainController
