@@ -262,5 +262,12 @@ resource "azurerm_network_interface" "dc1-update" {
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
   dns_servers               = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 
+  ip_configuration {
+    name                          = "ipconfig1"
+    subnet_id                     = "${azurerm_subnet.subnet1.id}"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "${var.dc1IPAddress}"
+  }
+
   depends_on          = ["azurerm_virtual_machine_extension.dc1"]
 }
