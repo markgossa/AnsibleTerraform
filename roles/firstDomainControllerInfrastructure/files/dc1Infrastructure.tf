@@ -183,7 +183,8 @@ resource "azurerm_network_interface" "dc1" {
   ip_configuration {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "${var.dc1IPAddress}"
     public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
   }
 }
@@ -256,7 +257,7 @@ resource "azurerm_virtual_machine_extension" "dc1" {
 
 # Modify DNS servers on virtual network
 resource "azurerm_network_interface" "dc1-update" {
-  name                      = "nic1"
+  name                      = "${var.dc1Name}-nic1"
   location                  = "${azurerm_resource_group.resourceGroup1.location}"
   resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
   dns_servers               = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
@@ -265,7 +266,6 @@ resource "azurerm_network_interface" "dc1-update" {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${var.dc1IPAddress}"
   }
 
   depends_on          = ["azurerm_virtual_machine_extension.dc1"]
