@@ -267,6 +267,7 @@ resource "azurerm_network_interface" "dc1-update" {
     subnet_id                     = "${azurerm_subnet.subnet1.id}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.dc1IPAddress}"
+    public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
   }
 
   depends_on          = ["azurerm_virtual_machine_extension.dc1"]
