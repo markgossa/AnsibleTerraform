@@ -263,6 +263,8 @@ resource "azurerm_network_interface" "dc1-update" {
 
   ip_configuration {
     name                          = "ipconfig1"
+    subnet_id                     = "${azurerm_subnet.subnet1.id}"
+    private_ip_address_allocation = "static"
     public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
   }
 
