@@ -199,14 +199,26 @@ resource "azurerm_public_ip" "dc1" {
   domain_name_label            = "${var.dc1Name}-azurevm"
 }
 
+# VM 1 - Image details
+data "azurerm_image" "image" {
+  name                = "contdc01-image-1709-dns"
+  resource_group_name = "Data"
+}
+
 # VM 1 - Create VM
 resource "azurerm_virtual_machine" "dc1" {
-  name                  = "${var.dc1Name}"
-  location              = "${azurerm_resource_group.resourceGroup1.location}"
-  resource_group_name   = "${azurerm_resource_group.resourceGroup1.name}"
-  network_interface_ids = ["${azurerm_network_interface.dc1.id}"]
-  vm_size               = "${var.dc1Size}"
+  name                              = "${var.dc1Name}"
+  location                          = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name               = "${azurerm_resource_group.resourceGroup1.name}"
+  network_interface_ids             = ["${azurerm_network_interface.dc1.id}"]
+  vm_size                           = "${var.dc1Size}"
+  delete_os_disk_on_termination     = "True"
+  delete_data_disks_on_termination  = "True"
   
+  storage_image_reference {
+    id="${data.azurerm_image.image.id}"
+  }
+
   storage_os_disk {
     name                = "${var.dc1Name}-c"
     caching             = "${var.dc1DiskCaching}"
