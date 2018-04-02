@@ -36,7 +36,7 @@
 
 - name: Restart virtual machine
   azure_rm_virtualmachine:
-    resource_group: '{{ resource_group_name }}'
+    resource_group: '{{ resourceGroupName }}'
     name: '{{ dc1Name }}'
     restarted: yes
   when: CreateNewDomain.reboot_required == True
