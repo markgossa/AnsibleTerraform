@@ -1,4 +1,9 @@
 - hosts: localhost
   gather_facts: no
   roles:
-  - firstDomainControllerInfrastructure
+  - domainControllerInfrastructure
+
+- hosts: DomainControllers[0]
+  gather_facts: no
+  roles:
+  - firstDomainControllerConfiguration

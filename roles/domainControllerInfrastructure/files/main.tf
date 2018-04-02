@@ -255,7 +255,7 @@ resource "azurerm_virtual_machine_extension" "dc1" {
   SETTINGS
   protected_settings = <<PROTECTED_SETTINGS
     {
-        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1 -SkipNetworkProfileCheck -EnableCredSSP"
+        "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1 -SkipNetworkProfileCheck -EnableCredSSP -ForceNewSSLCert"
     }
   PROTECTED_SETTINGS
 }

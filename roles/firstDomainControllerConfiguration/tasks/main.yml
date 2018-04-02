@@ -1,49 +1,50 @@
-# Domain controller 1 build
-- hosts: DomainControllers[0]
-  gather_facts: no
-  tasks:
-    - name: Install PowerShell modules
-      win_psmodule:
-        name: '{{ item }}'
-        state: present
-      with_items:
-        - xActiveDirectory
-        - xComputerManagement
-        - xNetworking
-        - xDnsServer
-        - xActiveDirectory
+- name: Wait for connection
+  wait_for_connection:
+    delay: 0
+    timeout: 600
+    
+- name: Install PowerShell modules
+  win_psmodule:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - xActiveDirectory
+    - xComputerManagement
+    - xNetworking
+    - xDnsServer
+    - xActiveDirectory
 
-    - name: Set WinRM service to automatic
-      win_dsc:
-        resource_name: Service
-        Name: WinRM
-        StartupType: Automatic
+- name: Set WinRM service to automatic
+  win_dsc:
+    resource_name: Service
+    Name: WinRM
+    StartupType: Automatic
 
-    - name: Install Windows Features
-      win_feature:
-        name: AD-Domain-Services,RSAT-ADDS-Tools,DNS
-        state: present
+- name: Install Windows Features
+  win_feature:
+    name: AD-Domain-Services,RSAT-ADDS-Tools,DNS
+    state: present
 
-    - name: Create new domain
-      win_dsc:
-        resource_name: xADDomain
-        DomainName: '{{ domain_name }}'
-        SafemodeAdministratorPassword_username: '{{ SafemodeAdministratorPassword_username }}'
-        SafemodeAdministratorPassword_password: '{{ SafemodeAdministratorPassword_password }}'
-        DomainAdministratorCredential_username: '{{ DomainAdministratorCredential_username }}'
-        DomainAdministratorCredential_password: '{{ DomainAdministratorCredential_password }}'
-      register: CreateNewDomain
+- name: Create new domain
+  win_dsc:
+    resource_name: xADDomain
+    DomainName: '{{ domain_name }}'
+    SafemodeAdministratorPassword_username: '{{ SafemodeAdministratorPassword_username }}'
+    SafemodeAdministratorPassword_password: '{{ SafemodeAdministratorPassword_password }}'
+    DomainAdministratorCredential_username: '{{ DomainAdministratorCredential_username }}'
+    DomainAdministratorCredential_password: '{{ DomainAdministratorCredential_password }}'
+  register: CreateNewDomain
 
-    - name: Restart virtual machine
-      azure_rm_virtualmachine:
-        resource_group: '{{ resource_group_name }}'
-        name: '{{ dc1Name }}'
-        restarted: yes
-      when: CreateNewDomain.reboot_required == True
-      delegate_to: localhost
+- name: Restart virtual machine
+  azure_rm_virtualmachine:
+    resource_group: '{{ resource_group_name }}'
+    name: '{{ dc1Name }}'
+    restarted: yes
+  when: CreateNewDomain.reboot_required == True
+  delegate_to: localhost
 
-    - name: Wait for reboot
-      wait_for_connection:
-        delay: 120
-        timeout: 600
-      when: CreateNewDomain.reboot_required == True
+- name: Wait for reboot
+  wait_for_connection:
+    delay: 120
+    timeout: 600
+  when: CreateNewDomain.reboot_required == True
