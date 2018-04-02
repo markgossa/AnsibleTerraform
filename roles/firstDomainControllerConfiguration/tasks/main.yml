@@ -12,7 +12,6 @@
     - xComputerManagement
     - xNetworking
     - xDnsServer
-    - xActiveDirectory
 
 - name: Set WinRM service to automatic
   win_dsc:
