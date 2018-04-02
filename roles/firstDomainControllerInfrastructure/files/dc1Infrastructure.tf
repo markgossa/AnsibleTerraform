@@ -227,13 +227,6 @@ resource "azurerm_virtual_machine" "dc1" {
     disk_size_gb        = "128"
   }
 
-  storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "${var.vmOffer}"
-    sku       = "${var.vmSku}"
-    version   = "latest"
-  }
-
   os_profile_windows_config {
     provision_vm_agent  = "True"
   }
