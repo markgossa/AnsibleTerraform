@@ -2,6 +2,10 @@
   azure_rm_virtualmachine:
     resource_group: '{{ resourceGroupName }}'
     name: '{{ dc1Name }}'
+    client_id: '{{ client_id }}'
+    subscription_id: '{{ subscription_id }}'
+    tenant: '{{ tenant_id }}'
+    secret: '{{ client_secret }}'
     restarted: yes
   delegate_to: localhost
 
