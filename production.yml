@@ -4,7 +4,7 @@ all:
       localhost:
       vars:
         ansible_connection:local
-        resourceGroupName:AnsibleTerraform-Contoso
+        resourceGroupName:AnsibleTerraform
         resourceGroupLocation:EastUS
         storageAccountName:storageacc79ruds778
         virtualNetworkName:vmnetwork
@@ -30,7 +30,7 @@ all:
           contdc01-azurevm.eastus.cloudapp.azure.com:
           contdc02-azurevm.eastus.cloudapp.azure.com:
         vars:
-          resourceGroupName:AnsibleTerraform-Contoso
+          resourceGroupName:AnsibleTerraform
           dc1Name:contdc01
           domain_name:contoso.com
           SafemodeAdministratorPassword_username:AzureAdmin
