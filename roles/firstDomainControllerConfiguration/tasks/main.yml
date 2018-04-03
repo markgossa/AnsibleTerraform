@@ -4,8 +4,8 @@
     name: '{{ dc1Name }}'
     client_id: '{{ client_id }}'
     subscription_id: '{{ subscription_id }}'
-    tenant_id: '{{ tenant_id }}'
-    client_secret: '{{ client_secret }}'
+    tenant: '{{ tenant_id }}'
+    secret: '{{ client_secret }}'
     restarted: yes
   delegate_to: localhost
 
