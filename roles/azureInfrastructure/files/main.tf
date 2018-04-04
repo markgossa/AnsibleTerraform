@@ -24,7 +24,7 @@ provider "azurerm" {
 }
 
 module "resourceGroup" {
-    source                  = "resourceGroup/resourceGroup.tf"
+    source                  = "resourceGroup"
     resourceGroupName       = "${var.resourceGroupName}"
     resourceGroupLocation   = "${var.resourceGroupLocation}"
 }
@@ -34,7 +34,7 @@ module "storage" {
 }
 
 module "networking" {
-    source                        = "networking/networking.tf"
+    source                        = "networking"
     virtualNetworkName            = "${var.virtualNetworkName}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
