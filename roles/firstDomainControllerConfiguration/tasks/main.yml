@@ -1,0 +1,53 @@
+- name: Wait for connection
+  wait_for_connection:
+    delay: 0
+    timeout: 60
+    
+- name: Install PowerShell modules
+  win_psmodule:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - xActiveDirectory
+    - xComputerManagement
+    - xNetworking
+    - xDnsServer
+
+- name: Set WinRM service to automatic
+  win_dsc:
+    resource_name: Service
+    Name: WinRM
+    StartupType: Automatic
+
+- name: Install Windows Features
+  win_feature:
+    name: AD-Domain-Services,RSAT-ADDS-Tools,DNS
+    state: present
+
+- name: Create new domain
+  win_dsc:
+    resource_name: xADDomain
+    DomainName: '{{ domain_name }}'
+    SafemodeAdministratorPassword_username: '{{ SafemodeAdministratorPassword_username }}'
+    SafemodeAdministratorPassword_password: '{{ SafemodeAdministratorPassword_password }}'
+    DomainAdministratorCredential_username: '{{ DomainAdministratorCredential_username }}'
+    DomainAdministratorCredential_password: '{{ DomainAdministratorCredential_password }}'
+  register: CreateNewDomain
+
+- name: Restart virtual machine
+  azure_rm_virtualmachine:
+    resource_group: '{{ resourceGroupName }}'
+    name: '{{ dc1Name }}'
+    client_id: '{{ client_id }}'
+    subscription_id: '{{ subscription_id }}'
+    tenant: '{{ tenant_id }}'
+    secret: '{{ client_secret }}'
+    restarted: yes
+  when: CreateNewDomain.reboot_required == True
+  delegate_to: localhost
+
+- name: Wait for reboot
+  wait_for_connection:
+    delay: 120
+    timeout: 600
+  when: CreateNewDomain.reboot_required == True

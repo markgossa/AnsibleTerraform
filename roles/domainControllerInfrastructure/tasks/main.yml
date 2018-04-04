@@ -1,0 +1,33 @@
+- name: Run terraform init
+  command: "terraform init roles/domainControllerInfrastructure/files"
+
+- name: Run terraform apply
+  command: "terraform apply
+  -state=/var/lib/terraform/terraform-'{{ resourceGroupName }}'.tfstate
+  -auto-approve
+  -var subscription_id='{{ subscription_id }}' 
+  -var client_id='{{ client_id }}'
+  -var tenant_id='{{ tenant_id }}'
+  -var client_secret='{{ client_secret }}'
+  -var resourceGroupName='{{ resourceGroupName }}'
+  -var resourceGroupLocation='{{ resourceGroupLocation }}'
+  -var storageAccountName='{{ storageAccountName }}'
+  -var virtualNetworkName='{{ virtualNetworkName }}'
+  -var virtualNetworkAddressSpace='{{ virtualNetworkAddressSpace }}'
+  -var virtualNetworkDnsServer1='{{ virtualNetworkDnsServer1 }}'
+  -var virtualNetworkDnsServer2='{{ virtualNetworkDnsServer2 }}'
+  -var subnetName='{{ subnetName }}'
+  -var subnetNetworkID='{{ subnetNetworkID }}'
+  -var storageAccountTier='{{ storageAccountTier }}'
+  -var storageAccountReplicationType='{{ storageAccountReplicationType }}'
+  -var dc1Name='{{ dc1Name }}'
+  -var dc1IPAddress='{{ dc1IPAddress }}'
+  -var dc1Size='{{ dc1Size }}'
+  -var dc1DiskCaching='{{ dc1DiskCaching }}'
+  -var dc1ManagedDiskType='{{ dc1ManagedDiskType }}'
+  -var vmUserName='{{ vmUserName }}'
+  -var vmPassword='{{ vmPassword }}'
+  -var vmSku='{{ vmSku }}'
+  -var vmOffer='{{ vmOffer }}'
+  -var managementIP='{{ managementIP }}'
+  roles/domainControllerInfrastructure/files"
