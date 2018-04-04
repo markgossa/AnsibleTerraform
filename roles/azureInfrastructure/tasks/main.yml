@@ -1,5 +1,5 @@
 - name: Run terraform init
-  command: "terraform init roles/domainControllerInfrastructure/files"
+  command: "terraform init roles/azureInfrastructure/files"
 
 - name: Run terraform apply
   command: "terraform apply
@@ -30,4 +30,4 @@
   -var vmSku='{{ vmSku }}'
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
-  roles/domainControllerInfrastructure/files"
+  roles/azureInfrastructure/files"

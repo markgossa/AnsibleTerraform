@@ -15,8 +15,6 @@ all:
         subnetNetworkID:10.0.0.0/24
         storageAccountTier:Standard
         storageAccountReplicationType:LRS
-        dc1Name:contdc01
-        dc1IPAddress:10.0.0.11
         dc1Size:Standard_DS1_v2
         dc1DiskCaching:ReadOnly
         dc1ManagedDiskType:Standard_LRS
@@ -28,6 +26,9 @@ all:
       children:
         DomainControllers:
           contdc01-azurevm.eastus.cloudapp.azure.com:
+            vars:
+              hostname:contdc01
+              ipAddress:10.0.0.11
           contdc02-azurevm.eastus.cloudapp.azure.com:
         vars:
           resourceGroupName:AnsibleTerraform

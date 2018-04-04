@@ -1,7 +1,7 @@
 - hosts: localhost
   gather_facts: no
   roles:
-  - domainControllerInfrastructure
+    - azureInfrastructure
 
 - hosts: DomainControllers[0]
   gather_facts: no
