@@ -30,7 +30,7 @@ module "resourceGroup" {
 }
 
 module "storage" {
-    source  = "storage/storage.tf"
+    source  = "storage"
 }
 
 module "networking" {
