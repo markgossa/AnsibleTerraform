@@ -15,6 +15,14 @@ variable "client_secret" {
     type = "string"
 }
 
+variable "resourceGroupName" {
+    type = "string"
+}
+
+variable "resourceGroupLocation" {
+    type = "string"
+}
+
 # Configure the Azure Provider
 provider "azurerm" { 
   subscription_id   = "${var.subscription_id}"
@@ -42,7 +50,7 @@ module "networking" {
     subnetName                    = "${var.subnetName}"
     subnetNetworkID               = "${var.subnetNetworkID}"
     storageAccountTier            = "${var.storageAccountTier}"
-    sotrageAccountReplicationType = "${var.sotrageAccountReplicationType}"
+    storageAccountReplicationType = "${var.storageAccountReplicationType}"
     storageAccountName            = "${var.storageAccountName}"
     managementIP                  = "${var.managementIP}"
 }
