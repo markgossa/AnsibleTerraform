@@ -101,32 +101,37 @@ variable "vmOffer" {
 
 # Configure the Azure Provider
 provider "azurerm" { 
-  subscription_id   = "${var.subscription_id}"
-  client_id         = "${var.client_id}"
-  tenant_id         = "${var.tenant_id}"
-  client_secret     = "${var.client_secret}"
+  subscription_id                 = "${var.subscription_id}"
+  client_id                       = "${var.client_id}"
+  tenant_id                       = "${var.tenant_id}"
+  client_secret                   = "${var.client_secret}"
 }
 
 module "resourceGroup" {
-    source                  = "resourceGroup"
-    resourceGroupName       = "${var.resourceGroupName}"
-    resourceGroupLocation   = "${var.resourceGroupLocation}"
+    source                        = "resourceGroup"
+    resourceGroupName             = "${var.resourceGroupName}"
+    resourceGroupLocation         = "${var.resourceGroupLocation}"
 }
 
 module "storage" {
-    source  = "storage"
+    source                        = "storage"   
+    resourceGroupName             = "${var.resourceGroupName}"
+    resourceGroupLocation         = "${var.resourceGroupLocation}"
+    storageAccountTier            = "${var.storageAccountTier}"
+    storageAccountReplicationType = "${var.storageAccountReplicationType}"
+    storageAccountName            = "${var.storageAccountName}"
+
 }
 
 module "networking" {
     source                        = "networking"
+    resourceGroupName             = "${var.resourceGroupName}"
+    resourceGroupLocation         = "${var.resourceGroupLocation}"
     virtualNetworkName            = "${var.virtualNetworkName}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     virtualNetworkAddressSpace    = "${var.virtualNetworkAddressSpace}"
     subnetName                    = "${var.subnetName}"
     subnetNetworkID               = "${var.subnetNetworkID}"
-    storageAccountTier            = "${var.storageAccountTier}"
-    storageAccountReplicationType = "${var.storageAccountReplicationType}"
-    storageAccountName            = "${var.storageAccountName}"
     managementIP                  = "${var.managementIP}"
 }
