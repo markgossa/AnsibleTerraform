@@ -23,7 +23,7 @@ resource "azurerm_public_ip" "vm" {
   resource_group_name          = "${var.resourceGroupName}"
   public_ip_address_allocation = "Dynamic"
   idle_timeout_in_minutes      = 30
-  domain_name_label            = "$${element(var["vmList.hostname"], count.index)}-azurevm"
+  #domain_name_label            = "$${element(var["vmList.hostname"], count.index)}-azurevm"
 }
 
 # VM 1 - Image details
