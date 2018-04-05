@@ -22,6 +22,8 @@ all:
         vmSku:Datacenter-Core-1709-smalldisk
         vmUserName:AzureAdmin
         vmPassword:AzurePassword1
+        dc1Name:contdc01
+        dc1IPAddress:10.0.0.11
     Windows:
       children:
         DomainControllers:
