@@ -89,3 +89,7 @@ variable "vmSku" {
 variable "vmOffer" {
     type = "string"
 }
+
+variable "vmList" {
+    type = "map"
+}
