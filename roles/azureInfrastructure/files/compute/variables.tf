@@ -49,3 +49,7 @@ variable "virtualNetworkDnsServer1" {
 variable "virtualNetworkDnsServer2" {
     type = "string"
 }
+
+variable "subnetId" {
+    type = "string"
+}

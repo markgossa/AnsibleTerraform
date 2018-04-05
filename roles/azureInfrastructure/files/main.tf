@@ -49,5 +49,7 @@ module "compute" {
     vmSku                         = "${var.vmSku}"
     dc1IPAddress                  = "${var.dc1IPAddress}"
     vmOffer                       = "${var.vmOffer}"
-    subnet_id                     = "${module.networking.subnet_id}"
+    subnetId                      = "${module.networking.subnetId}"
+    virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
+    virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
 }
