@@ -6,19 +6,15 @@ variable "resourceGroupLocation" {
     type = "string"
 }
 
-variable "dc1Name" {
+variable "vmSize" {
     type = "string"
 }
 
-variable "dc1Size" {
+variable "vmDiskCaching" {
     type = "string"
 }
 
-variable "dc1DiskCaching" {
-    type = "string"
-}
-
-variable "dc1ManagedDiskType" {
+variable "vmManagedDiskType" {
     type = "string"
 }
 
@@ -31,10 +27,6 @@ variable "vmPassword" {
 }
 
 variable "vmSku" {
-    type = "string"
-}
-
-variable "dc1IPAddress" {
     type = "string"
 }
 

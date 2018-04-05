@@ -52,4 +52,5 @@ module "compute" {
     subnetId                      = "${module.networking.subnetId}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
+    vmList                        = "${var.vmList}"
 }
