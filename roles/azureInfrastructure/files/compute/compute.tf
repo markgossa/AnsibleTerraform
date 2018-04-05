@@ -11,7 +11,7 @@ resource "azurerm_network_interface" "vm" {
     subnet_id                     = "${var.subnetId}"
     private_ip_address_allocation = "static"
     private_ip_address            = "$${element(var["vmList.ipAddress"], count.index)}"
-    public_ip_address_id          = "${azurerm_public_ip.vm.id}"
+    #public_ip_address_id          = "${azurerm_public_ip.vm.id}"
   }
 }
 
