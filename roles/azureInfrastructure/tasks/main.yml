@@ -1,10 +1,10 @@
-- vars: 
+- hosts: localhost
+  vars: 
     vmList: "{{ hostvars[item]['hostname'] }} = {{ hostvars[item]['ipAddress'] }}"
     with_items: "{{ groups['DomainControllers'] }}"
 
 - name: Return vmList
-  debug:
-    msg: "{{ vmList }}"
+  debug: var=vmList
 
 - name: Run terraform init
   command: "terraform init roles/azureInfrastructure/files"
