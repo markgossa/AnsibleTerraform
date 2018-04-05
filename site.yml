@@ -2,7 +2,7 @@
   gather_facts: no
   vars: 
     vmList: "{{ hostvars[item]['hostname'] }} = {{ hostvars[item]['ipAddress'] }}"
-    with_items: "{{ groups['DomainControllers'] }}"
+  with_items: "{{ groups['DomainControllers'] }}"
   roles:
     - azureInfrastructure
 
