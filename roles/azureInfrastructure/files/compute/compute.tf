@@ -18,12 +18,11 @@ resource "azurerm_network_interface" "vm" {
 # VM 1 - Create public IP
 resource "azurerm_public_ip" "vm" {
   count                        = 2
-  name                         = "${element(var["vmList.hostname"], count.index)}-public-ip"
+  name                         = "name-public-ip"
   location                     = "${var.resourceGroupLocation}"
   resource_group_name          = "${var.resourceGroupName}"
   public_ip_address_allocation = "Dynamic"
   idle_timeout_in_minutes      = 30
-  domain_name_label            = "${element(var["vmList.hostname"], count.index)}-azurevm"
 }
 
 # VM 1 - Image details
