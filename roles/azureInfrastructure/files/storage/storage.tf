@@ -21,8 +21,8 @@ variable "storageAccountName" {
 
 # Create a storage account
 resource "azurerm_storage_account" "storage" {
-  resource_group_name       = "${azurerm_resource_group.resourceGroup1.name}"
-  location                  = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name       = "${var.resourceGroupName}"
+  location                  = "${var.resourceGroupLocation}"
   account_tier              = "${var.storageAccountTier}"
   account_replication_type  = "${var.storageAccountReplicationType}"
   name                      = "${var.storageAccountName}"
