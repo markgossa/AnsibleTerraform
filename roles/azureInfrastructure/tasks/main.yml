@@ -1,6 +1,6 @@
 - name: Debug
   debug: 
-    msg: "{{ item.hostname }} {{ item.ipAddress }}"
+    msg: "{{ hostvars[item][hostname] }} {{ hostvars[item][ipAddress] }}"
   with_items: "{{ groups['DomainControllers'] }}"
 
 - name: Run terraform init
