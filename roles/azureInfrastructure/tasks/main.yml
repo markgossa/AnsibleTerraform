@@ -1,5 +1,8 @@
+- set_fact:
+    vmList: []
+
 - set_fact: 
-    vmList: ["{{ hostvars[item]['hostname'] }} = {{ hostvars[item]['ipAddress'] }}"]
+    vmList: "{{ vmList }} + ['{{ hostvars[item]['hostname'] }} = {{ hostvars[item]['ipAddress'] }}']"
   with_items: "{{ groups['DomainControllers'] }}"
 
 - name: Return vmList
