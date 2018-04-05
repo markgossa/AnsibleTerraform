@@ -4,7 +4,7 @@
   loop: "{{ groups['all:DomainControllers'] }}"
 
 - name: debug2
-- debug:
+  debug:
     msg: "{{ item }}"
   loop: "{{ groups['all'] }}"
 
