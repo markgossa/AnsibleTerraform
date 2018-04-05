@@ -35,3 +35,19 @@ module "networking" {
     subnetNetworkID               = "${var.subnetNetworkID}"
     managementIP                  = "${var.managementIP}"
 }
+
+module "compute" {
+    source                        = "compute"
+    resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
+    resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
+    dc1Name                       = "${var.dc1Name}"
+    dc1Size                       = "${var.dc1Size}"
+    dc1DiskCaching                = "${var.dc1DiskCaching}"
+    dc1ManagedDiskType            = "${var.dc1ManagedDiskType}"
+    vmUserName                    = "${var.vmUserName}"
+    vmPassword                    = "${var.vmPassword}"
+    vmSku                         = "${var.vmSku}"
+    dc1IPAddress                  = "${var.dc1IPAddress}"
+    vmOffer                       = "${var.vmOffer}"
+    subnet_id                     = "${module.networking.subnet_id}"
+}

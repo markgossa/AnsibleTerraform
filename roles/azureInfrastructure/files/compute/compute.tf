@@ -1,58 +1,5 @@
-# Variables
-variable "resourceGroupName" {
-    type = "string"
-}
-
-variable "resourceGroupLocation" {
-    type = "string"
-}
-
-variable "dc1Name" {
-    type = "string"
-}
-
-variable "dc1Size" {
-    type = "string"
-}
-
-variable "dc1DiskCaching" {
-    type = "string"
-}
-
-variable "dc1ManagedDiskType" {
-    type = "string"
-}
-
-variable "vmUserName" {
-    type = "string"
-}
-
-variable "vmPassword" {
-    type = "string"
-}
-
-variable "vmSku" {
-    type = "string"
-}
-
-variable "dc1IPAddress" {
-    type = "string"
-}
-
-variable "vmOffer" {
-    type = "string"
-}
-
-# Configure the Azure Provider
-provider "azurerm" { 
-  subscription_id   = "${var.subscription_id}"
-  client_id         = "${var.client_id}"
-  tenant_id         = "${var.tenant_id}"
-  client_secret     = "${var.client_secret}"
-}
-
 # VM 1 - Create NIC
-resource "azurerm_network_interface" "dc1" {
+resource "azurerm_network_interface" "vm" {
   name                      = "${var.dc1Name}-nic1"
   location                  = "${var.resourceGroupLocation}"
   resource_group_name       = "${var.resourceGroupName}"
@@ -60,15 +7,15 @@ resource "azurerm_network_interface" "dc1" {
 
   ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = "${azurerm_subnet.subnet1.id}"
+    subnetId                      = "${var.subnetId}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.dc1IPAddress}"
-    public_ip_address_id          = "${azurerm_public_ip.dc1.id}"
+    public_ip_address_id          = "${azurerm_public_ip.vm.id}"
   }
 }
 
 # VM 1 - Create public IP
-resource "azurerm_public_ip" "dc1" {
+resource "azurerm_public_ip" "vm" {
   name                         = "${var.dc1Name}-public-ip"
   location                     = "${var.resourceGroupLocation}"
   resource_group_name          = "${var.resourceGroupName}"
@@ -84,11 +31,11 @@ data "azurerm_image" "image" {
 }
 
 # VM 1 - Create VM
-resource "azurerm_virtual_machine" "dc1" {
+resource "azurerm_virtual_machine" "vm" {
   name                              = "${var.dc1Name}"
   location                          = "${var.resourceGroupLocation}"
   resource_group_name               = "${var.resourceGroupName}"
-  network_interface_ids             = ["${azurerm_network_interface.dc1.id}"]
+  network_interface_ids             = ["${azurerm_network_interface.vm.id}"]
   vm_size                           = "${var.dc1Size}"
   delete_os_disk_on_termination     = "True"
   delete_data_disks_on_termination  = "True"
@@ -117,11 +64,11 @@ resource "azurerm_virtual_machine" "dc1" {
 }
 
 # VM 1 - Create VM extension to configure Ansible remoting
-resource "azurerm_virtual_machine_extension" "dc1" {
+resource "azurerm_virtual_machine_extension" "vm" {
   name                       = "ConfigureRemotingForAnsible"
   location                   = "${var.resourceGroupLocation}"
   resource_group_name        = "${var.resourceGroupName}"
-  virtual_machine_name       = "${azurerm_virtual_machine.dc1.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.vm.name}"
   publisher                  = "Microsoft.Compute"
   type                       = "CustomScriptExtension"
   type_handler_version       = "1.7"
