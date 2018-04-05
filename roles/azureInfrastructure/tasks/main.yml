@@ -1,7 +1,6 @@
-- name: Create DomainControllersArray
-  vars: 
+- vars: 
     vmList: "{{ hostvars[item]['hostname'] }} = {{ hostvars[item]['ipAddress'] }}"
-  with_items: "{{ groups['DomainControllers'] }}"
+    with_items: "{{ groups['DomainControllers'] }}"
 
 - name: Return vmList
   debug:
