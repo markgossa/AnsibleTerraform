@@ -1,9 +1,7 @@
 - name: Debug
   debug: 
-    msg: "{{ item.name }} {{ item.groups }}"
-  with_items:
-    - { name: 'testuser1', groups: 'wheel' }
-    - { name: 'testuser2', groups: 'root' }
+    msg: "{{ item.hostname }} {{ item.ipAddress }}"
+  with_items: "{{ groups['DomainControllers'] }}"
 
 - name: Run terraform init
   command: "terraform init roles/azureInfrastructure/files"
