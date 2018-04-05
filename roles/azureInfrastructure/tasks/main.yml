@@ -1,3 +1,11 @@
+{% for host in groups['DomainControllers'] %}
+- name: debug
+  debug:
+    msg: "{{ hostvars[host]['hostname'] }}"
+  debug:
+    msg: "{{ hostvars[host]['ipAddress'] }}"    
+{% endfor %}"
+
 - name: Run terraform init
   command: "terraform init roles/azureInfrastructure/files"
 
