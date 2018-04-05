@@ -1,7 +1,7 @@
 - name: Create DomainControllersArray
   shell: "echo \"{{ hostvars[item]['hostname'] }}\" = \"{{ hostvars[item]['ipAddress'] }}\""
   with_items: "{{ groups['DomainControllers'] }}"
-  register: DomainControllersArray
+  register: DomainControllersArray.stdout
 
 - name: Run terraform init
   command: "terraform init roles/azureInfrastructure/files"
