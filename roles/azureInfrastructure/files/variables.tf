@@ -62,19 +62,15 @@ variable "storageAccountName" {
     type = "string"
 }
 
-variable "dc1Name" {
+variable "vm1Size" {
     type = "string"
 }
 
-variable "dc1Size" {
+variable "vm1DiskCaching" {
     type = "string"
 }
 
-variable "dc1DiskCaching" {
-    type = "string"
-}
-
-variable "dc1ManagedDiskType" {
+variable "vm1ManagedDiskType" {
     type = "string"
 }
 
@@ -87,10 +83,6 @@ variable "vmPassword" {
 }
 
 variable "vmSku" {
-    type = "string"
-}
-
-variable "dc1IPAddress" {
     type = "string"
 }
 
