@@ -17,6 +17,7 @@ resource "azurerm_network_interface" "vm" {
 
 # VM 1 - Create public IP
 resource "azurerm_public_ip" "vm" {
+  count                        = 2
   name                         = "${element(var["vmList.hostname"], count.index)}-public-ip"
   location                     = "${var.resourceGroupLocation}"
   resource_group_name          = "${var.resourceGroupName}"
@@ -33,6 +34,7 @@ data "azurerm_image" "image" {
 
 # VM 1 - Create VM
 resource "azurerm_virtual_machine" "vm" {
+  count                             = 2
   name                              = "${element(var["vmList.hostname"], count.index)}"
   location                          = "${var.resourceGroupLocation}"
   resource_group_name               = "${var.resourceGroupName}"
