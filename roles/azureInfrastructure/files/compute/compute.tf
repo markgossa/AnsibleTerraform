@@ -137,4 +137,3 @@ resource "azurerm_virtual_machine_extension" "dc1" {
     }
   PROTECTED_SETTINGS
 }
-

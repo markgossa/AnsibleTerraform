@@ -107,6 +107,7 @@ provider "azurerm" {
   client_secret                   = "${var.client_secret}"
 }
 
+# Create infrastructure
 module "resourceGroup" {
     source                        = "resourceGroup"
     resourceGroupName             = "${var.resourceGroupName}"
@@ -115,8 +116,8 @@ module "resourceGroup" {
 
 module "storage" {
     source                        = "storage"   
-    resourceGroupName             = "${var.resourceGroupName}"
-    resourceGroupLocation         = "${var.resourceGroupLocation}"
+    resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
+    resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
     storageAccountTier            = "${var.storageAccountTier}"
     storageAccountReplicationType = "${var.storageAccountReplicationType}"
     storageAccountName            = "${var.storageAccountName}"
