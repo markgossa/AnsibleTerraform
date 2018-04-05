@@ -7,7 +7,7 @@ resource "azurerm_network_interface" "vm" {
 
   ip_configuration {
     name                          = "ipconfig1"
-    subnetId                      = "${var.subnetId}"
+    subnet_id                     = "${var.subnetId}"
     private_ip_address_allocation = "static"
     private_ip_address            = "${var.dc1IPAddress}"
     public_ip_address_id          = "${azurerm_public_ip.vm.id}"
