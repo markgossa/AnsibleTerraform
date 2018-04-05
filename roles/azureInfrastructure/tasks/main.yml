@@ -38,5 +38,5 @@
   -var vmSku='{{ vmSku }}'
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
-  -var vmList='{{ vmList }}'
+  -var vmList=['{{ vmList }}']
   roles/azureInfrastructure/files"
