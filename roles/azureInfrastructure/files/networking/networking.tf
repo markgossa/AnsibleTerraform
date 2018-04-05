@@ -39,8 +39,8 @@ variable "managementIP" {
 resource "azurerm_virtual_network" "network1" {
   name                              = "${var.virtualNetworkName}"
   address_space                     = ["${var.virtualNetworkAddressSpace}"]
-  location                          = "${azurerm_resource_group.resourceGroup1.location}"
-  resource_group_name               = "${azurerm_resource_group.resourceGroup1.name}"
+  location                          = "${var.resourceGroupLocation}"
+  resource_group_name               = "${var.resourceGroupName}"
   dns_servers                       = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 }
 
@@ -48,7 +48,7 @@ resource "azurerm_virtual_network" "network1" {
 resource azurerm_subnet "subnet1" {
   name                              = "${var.subnetName}"
   address_prefix                    = "${var.subnetNetworkID}"
-  resource_group_name               = "${azurerm_resource_group.resourceGroup1.name}"
+  resource_group_name               = "${var.resourceGroupName}"
   virtual_network_name              = "${azurerm_virtual_network.network1.name}"
   network_security_group_id         = "${azurerm_network_security_group.nsg1.id}"
 }
@@ -56,8 +56,8 @@ resource azurerm_subnet "subnet1" {
 # Create network security group
 resource "azurerm_network_security_group" "nsg1" {
   name                              = "nsg1"
-  resource_group_name               = "${azurerm_resource_group.resourceGroup1.name}"
-  location                          = "${azurerm_resource_group.resourceGroup1.location}"
+  resource_group_name               = "${var.resourceGroupName}"
+  location                          = "${var.resourceGroupLocation}"
 
   security_rule {
       name                          = "RDP"

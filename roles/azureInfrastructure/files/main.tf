@@ -126,8 +126,8 @@ module "storage" {
 
 module "networking" {
     source                        = "networking"
-    resourceGroupName             = "${var.resourceGroupName}"
-    resourceGroupLocation         = "${var.resourceGroupLocation}"
+    resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
+    resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
     virtualNetworkName            = "${var.virtualNetworkName}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
