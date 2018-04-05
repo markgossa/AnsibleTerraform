@@ -53,3 +53,7 @@ variable "virtualNetworkDnsServer2" {
 variable "subnetId" {
     type = "string"
 }
+
+variable "vmList" {
+    type = "map"
+}

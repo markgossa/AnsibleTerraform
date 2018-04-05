@@ -1,27 +1,28 @@
 # VM 1 - Create NIC
 resource "azurerm_network_interface" "vm" {
-  name                      = "${var.dc1Name}-nic1"
+  count                     = 2
+  name                      = "${element(var.vmList.hostname, count.index)}-nic1"
   location                  = "${var.resourceGroupLocation}"
   resource_group_name       = "${var.resourceGroupName}"
   dns_servers               = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 
   ip_configuration {
-    name                          = "ipconfig1"
+    name                          = "${element(var.vmList.hostname, count.index)}-ipconfig1"
     subnet_id                     = "${var.subnetId}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${var.dc1IPAddress}"
+    private_ip_address            = "${element(var.vmList.ipAddress, count.index)}"
     public_ip_address_id          = "${azurerm_public_ip.vm.id}"
   }
 }
 
 # VM 1 - Create public IP
 resource "azurerm_public_ip" "vm" {
-  name                         = "${var.dc1Name}-public-ip"
+  name                         = "${element(var.vmList.hostname, count.index)}-public-ip"
   location                     = "${var.resourceGroupLocation}"
   resource_group_name          = "${var.resourceGroupName}"
   public_ip_address_allocation = "Dynamic"
   idle_timeout_in_minutes      = 30
-  domain_name_label            = "${var.dc1Name}-azurevm"
+  domain_name_label            = "${element(var.vmList.hostname, count.index)}-azurevm"
 }
 
 # VM 1 - Image details
@@ -32,11 +33,11 @@ data "azurerm_image" "image" {
 
 # VM 1 - Create VM
 resource "azurerm_virtual_machine" "vm" {
-  name                              = "${var.dc1Name}"
+  name                              = "${element(var.vmList.hostname, count.index)}"
   location                          = "${var.resourceGroupLocation}"
   resource_group_name               = "${var.resourceGroupName}"
   network_interface_ids             = ["${azurerm_network_interface.vm.id}"]
-  vm_size                           = "${var.dc1Size}"
+  vm_size                           = "${var.vmSize}"
   delete_os_disk_on_termination     = "True"
   delete_data_disks_on_termination  = "True"
   
@@ -45,10 +46,10 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    name                = "${var.dc1Name}-c"
-    caching             = "${var.dc1DiskCaching}"
+    name                = "${element(var.vmList.hostname, count.index)}-c"
+    caching             = "${var.vmDiskCaching}"
     create_option       = "FromImage"
-    managed_disk_type   = "${var.dc1ManagedDiskType}"
+    managed_disk_type   = "${var.vmManagedDiskType}"
     disk_size_gb        = "128"
   }
 
@@ -57,7 +58,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile {
-    computer_name       = "${var.dc1Name}"
+    computer_name       = "${element(var.vmList.hostname, count.index)}"
     admin_username      = "${var.vmUserName}"
     admin_password      = "${var.vmPassword}"
   }

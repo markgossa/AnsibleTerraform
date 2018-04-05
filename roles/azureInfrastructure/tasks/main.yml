@@ -1,4 +1,4 @@
-- name: Debug
+- name: Create DomainControllersArray
   shell: "echo \"{{ hostvars[item]['hostname'] }}\" = \"{{ hostvars[item]['ipAddress'] }}\""
   with_items: "{{ groups['DomainControllers'] }}"
   register: DomainControllersArray
@@ -25,14 +25,13 @@
   -var subnetNetworkID='{{ subnetNetworkID }}'
   -var storageAccountTier='{{ storageAccountTier }}'
   -var storageAccountReplicationType='{{ storageAccountReplicationType }}'
-  -var dc1Name='{{ dc1Name }}'
-  -var dc1IPAddress='{{ dc1IPAddress }}'
-  -var dc1Size='{{ dc1Size }}'
-  -var dc1DiskCaching='{{ dc1DiskCaching }}'
-  -var dc1ManagedDiskType='{{ dc1ManagedDiskType }}'
+  -var vmSize='{{ dcSize }}'
+  -var vmDiskCaching='{{ dcDiskCaching }}'
+  -var vmManagedDiskType='{{ dcManagedDiskType }}'
   -var vmUserName='{{ vmUserName }}'
   -var vmPassword='{{ vmPassword }}'
   -var vmSku='{{ vmSku }}'
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
+  -var vmList='{{ DomainControllersArray }}'
   roles/azureInfrastructure/files"
