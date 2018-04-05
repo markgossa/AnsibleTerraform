@@ -62,15 +62,15 @@ variable "storageAccountName" {
     type = "string"
 }
 
-variable "vm1Size" {
+variable "vmSize" {
     type = "string"
 }
 
-variable "vm1DiskCaching" {
+variable "vmDiskCaching" {
     type = "string"
 }
 
-variable "vm1ManagedDiskType" {
+variable "vmManagedDiskType" {
     type = "string"
 }
 
