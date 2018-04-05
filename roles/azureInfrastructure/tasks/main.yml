@@ -1,5 +1,5 @@
 - name: Debug
-  shell: "echo '{{ hostvars[item]['hostname'] }}' = {{ hostvars[item]['ipAddress'] }}"
+  shell: "echo \"{{ hostvars[item]['hostname'] }}\" = \"{{ hostvars[item]['ipAddress'] }}\""
   with_items: "{{ groups['DomainControllers'] }}"
   register: DomainControllersArray
 
