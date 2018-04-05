@@ -1,7 +1,11 @@
 - name: Create DomainControllersArray
-  shell: "echo \"{{ hostvars[item]['hostname'] }}\" = \"{{ hostvars[item]['ipAddress'] }}\""
+  vars: 
+    vmList: "{{ hostvars[item]['hostname'] }} = {{ hostvars[item]['ipAddress'] }}"
   with_items: "{{ groups['DomainControllers'] }}"
-  register: DomainControllersArray.stdout_lines
+
+- name: Return vmList
+  debug:
+    msg: "{{ vmList }}"
 
 - name: Run terraform init
   command: "terraform init roles/azureInfrastructure/files"
@@ -33,5 +37,5 @@
   -var vmSku='{{ vmSku }}'
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
-  -var vmList='{{ DomainControllersArray }}'
+  -var vmList='{{ vmList }}'
   roles/azureInfrastructure/files"
