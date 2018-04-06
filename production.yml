@@ -15,15 +15,13 @@ all:
         subnetNetworkID:10.0.0.0/24
         storageAccountTier:Standard
         storageAccountReplicationType:LRS
-        dc1Size:Standard_DS1_v2
-        dc1DiskCaching:ReadOnly
-        dc1ManagedDiskType:Standard_LRS
+        vmSize:Standard_DS1_v2
+        vmDiskCaching:ReadOnly
+        vmManagedDiskType:Standard_LRS
         vmOffer:WindowsServerSemiAnnual
         vmSku:Datacenter-Core-1709-smalldisk
         vmUserName:AzureAdmin
         vmPassword:AzurePassword1
-        dc1Name:contdc01
-        dc1IPAddress:10.0.0.11
     Windows:
       children:
         DomainControllers:
@@ -32,14 +30,16 @@ all:
               hostname:contdc01
               ipAddress:10.0.0.11
           contdc02-azurevm.eastus.cloudapp.azure.com:
+            vars:
+              hostname:contdc02
+              ipAddress:10.0.0.12
         vars:
-          resourceGroupName:AnsibleTerraform
-          dc1Name:contdc01
           domain_name:contoso.com
           SafemodeAdministratorPassword_username:AzureAdmin
           SafemodeAdministratorPassword_password:AzurePassword1
           DomainAdministratorCredential_username:AzureAdmin
           DomainAdministratorCredential_password:AzurePassword1
+          resourceGroupName:AnsibleTerraform
         WebServers:
           contweb01-azurevm.eastus.cloudapp.azure.com:
           contweb02-azurevm.eastus.cloudapp.azure.com:

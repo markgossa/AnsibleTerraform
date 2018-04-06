@@ -3,7 +3,12 @@
   roles:
     - azureInfrastructure
 
-#- hosts: DomainControllers[0]
-#  gather_facts: no
-#  roles:
-#  - firstDomainControllerConfiguration
+- hosts: DomainControllers[0]
+  gather_facts: no
+  roles:
+  - newADDomain
+
+- hosts: DomainControllers[1]
+  gather_facts: no
+  roles:
+  - newADDomainController

@@ -26,13 +26,13 @@
 
 - name: Create new domain
   win_dsc:
-    resource_name: xADDomain
+    resource_name: xADDomainController
     DomainName: '{{ domain_name }}'
     SafemodeAdministratorPassword_username: '{{ SafemodeAdministratorPassword_username }}'
     SafemodeAdministratorPassword_password: '{{ SafemodeAdministratorPassword_password }}'
     DomainAdministratorCredential_username: '{{ DomainAdministratorCredential_username }}'
     DomainAdministratorCredential_password: '{{ DomainAdministratorCredential_password }}'
-  register: CreateNewDomain
+  register: CreateNewDomainController
 
 - name: Restart virtual machine
   azure_rm_virtualmachine:
@@ -43,11 +43,18 @@
     tenant: '{{ tenant_id }}'
     secret: '{{ client_secret }}'
     restarted: yes
-  when: CreateNewDomain.reboot_required == True
+  when: CreateNewDomainController.reboot_required == True
   delegate_to: localhost
 
 - name: Wait for reboot
   wait_for_connection:
     delay: 120
     timeout: 600
-  when: CreateNewDomain.reboot_required == True
+  when: CreateNewDomainController.reboot_required == True
+
+- name: Set DNS servers on NIC
+  win_dsc:
+    resource_name: xDnsServerAddress
+    Address: '{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }}','{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}'
+    AddressFamily: 'IPv4'
+    InterfaceAlias: 'Ethernet'
