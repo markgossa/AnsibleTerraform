@@ -29,7 +29,7 @@
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
   -var dc1Name='{{ hostvars[groups['DomainControllers'][0]]['hostname'] }}'
-  -var dc1IPAddress='{{ hostvars[groups['DomainControllers'][0]]['IPAddress'] }}'
+  -var dc1IPAddress='{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}'
   -var dc2Name='{{ hostvars[groups['DomainControllers'][1]]['hostname'] }}'
-  -var dc2IPAddress='{{ hostvars[groups['DomainControllers'][1]]['IPAddress'] }}'
+  -var dc2IPAddress='{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }}'
   roles/azureInfrastructure/files"
