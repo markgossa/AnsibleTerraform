@@ -59,6 +59,6 @@
 - name: Set DNS servers on NIC
   win_dsc:
     resource_name: xDnsServerAddress
-    Address: "{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }},{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}"
+    Address: "{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }},{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }}"
     AddressFamily: 'IPv4'
     InterfaceAlias: '{{ interfaceName.stdout_lines[0] }}'

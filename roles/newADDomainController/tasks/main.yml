@@ -24,7 +24,33 @@
     name: AD-Domain-Services,RSAT-ADDS-Tools,DNS
     state: present
 
-- name: Create new domain
+- name: Join to the domain
+  win_dsc:
+    resource_name: xComputer
+    DomainName: '{{ domain_name }}'
+    Credential_username: '{{ DomainAdministratorCredential_username }}'
+    Credential_password: '{{ DomainAdministratorCredential_password }}'
+  register: JoinDomain
+
+- name: Restart virtual machine
+  azure_rm_virtualmachine:
+    resource_group: '{{ resourceGroupName }}'
+    name: '{{ hostname }}'
+    client_id: '{{ client_id }}'
+    subscription_id: '{{ subscription_id }}'
+    tenant: '{{ tenant_id }}'
+    secret: '{{ client_secret }}'
+    restarted: yes
+  when: JoinDomain.reboot_required == True
+  delegate_to: localhost    
+
+- name: Wait for reboot
+  wait_for_connection:
+    delay: 120
+    timeout: 600
+  when: JoinDomain.reboot_required == True
+
+- name: Create new domain controller
   win_dsc:
     resource_name: xADDomainController
     DomainName: '{{ domain_name }}'
@@ -52,9 +78,13 @@
     timeout: 600
   when: CreateNewDomainController.reboot_required == True
 
+- name: Get network adapter name
+  win_shell: "(Get-NetAdapter).Name"
+  register: interfaceName
+
 - name: Set DNS servers on NIC
   win_dsc:
     resource_name: xDnsServerAddress
     Address: "{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }},{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}"
     AddressFamily: 'IPv4'
-    InterfaceAlias: 'Ethernet'
+    InterfaceAlias: '{{ interfaceName.stdout_lines[0] }}'
