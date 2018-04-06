@@ -47,9 +47,9 @@ variable "subnetId" {
 }
 
 variable "vmName" {
-    type = "map"
+    type = "string"
 }
 
 variable "vmIPAddress" {
-    type = "map"
+    type = "string"
 }
