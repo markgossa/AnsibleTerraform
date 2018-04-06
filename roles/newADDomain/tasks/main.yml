@@ -54,7 +54,7 @@
 
 - name: Get network adapter name
   win_shell: "(Get-NetAdapter).Name"
-  register: interfaceName.stdout
+  register: interfaceName
 
 - name: Set DNS servers on NIC
   win_dsc:
