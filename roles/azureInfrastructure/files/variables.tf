@@ -90,6 +90,18 @@ variable "vmOffer" {
     type = "string"
 }
 
-variable "vmList" {
-    type = "map"
+variable "dc1Name" {
+    type = "string"
+}
+
+variable "dc1IPAddress" {
+    type = "string"
+}
+
+variable "dc2IPAddress" {
+    type = "string"
+}
+
+variable "dc2IPAddress" {
+    type = "string"
 }

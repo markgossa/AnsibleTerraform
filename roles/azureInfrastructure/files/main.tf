@@ -36,7 +36,7 @@ module "networking" {
     managementIP                  = "${var.managementIP}"
 }
 
-module "compute" {
+module "dc1_compute" {
     source                        = "compute"
     resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
     resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
@@ -55,7 +55,7 @@ module "compute" {
     vmIPAddress                   = "${var.dc1IPAddress}"
 }
 
-module "compute" {
+module "dc2_compute" {
     source                        = "compute"
     resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
     resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
@@ -69,7 +69,6 @@ module "compute" {
     subnetId                      = "${module.networking.subnetId}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
-    vmList                        = "${var.vmList}"
     vmName                        = "${var.dc2Name}"
     vmIPAddress                   = "${var.dc2IPAddress}"
 }
