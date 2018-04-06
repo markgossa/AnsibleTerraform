@@ -57,4 +57,4 @@
     resource_name: xDnsServerAddress
     Address: "{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }},{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}"
     AddressFamily: 'IPv4'
-    InterfaceAlias: '{{ ansible_interfaces.interface_name }}'
+    InterfaceAlias: '{{ ansible_interfaces[0].interface_name }}'
