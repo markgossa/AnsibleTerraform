@@ -50,7 +50,6 @@ module "dc1_compute" {
     subnetId                      = "${module.networking.subnetId}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
-    vmList                        = "${var.vmList}"
     vmName                        = "${var.dc1Name}"
     vmIPAddress                   = "${var.dc1IPAddress}"
 }

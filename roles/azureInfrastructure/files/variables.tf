@@ -98,7 +98,7 @@ variable "dc1IPAddress" {
     type = "string"
 }
 
-variable "dc2IPAddress" {
+variable "dc2Name" {
     type = "string"
 }
 
