@@ -27,6 +27,7 @@
 - name: Join to the domain
   win_dsc:
     resource_name: xComputer
+    Name: '{{ hostname }}'
     DomainName: '{{ domain_name }}'
     Credential_username: '{{ DomainAdministratorCredential_username }}'
     Credential_password: '{{ DomainAdministratorCredential_password }}'
