@@ -4,11 +4,11 @@
     - azureInfrastructure
 
 - hosts: DomainControllers[0]
-  gather_facts: no
+  gather_facts: yes
   roles:
   - newADDomain
 
 - hosts: DomainControllers[1]
-  gather_facts: no
+  gather_facts: yes
   roles:
   - newADDomainController
