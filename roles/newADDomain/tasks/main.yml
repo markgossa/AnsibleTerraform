@@ -61,4 +61,4 @@
     resource_name: xDnsServerAddress
     Address: "{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }},{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}"
     AddressFamily: 'IPv4'
-    InterfaceAlias: '{{ interfaceName.stdout }}'
+    InterfaceAlias: '{{ interfaceName.stdout_lines[0] }}'
