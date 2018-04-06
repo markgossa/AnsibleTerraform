@@ -37,7 +37,7 @@
 - name: Restart virtual machine
   azure_rm_virtualmachine:
     resource_group: '{{ resourceGroupName }}'
-    name: '{{ dc1Name }}'
+    name: '{{ hostname }}'
     client_id: '{{ client_id }}'
     subscription_id: '{{ subscription_id }}'
     tenant: '{{ tenant_id }}'
