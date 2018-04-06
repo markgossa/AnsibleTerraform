@@ -51,4 +51,25 @@ module "compute" {
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     vmList                        = "${var.vmList}"
+    vmName                        = "${var.dc1Name}"
+    vmIPAddress                   = "${var.dc1IPAddress}"
+}
+
+module "compute" {
+    source                        = "compute"
+    resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
+    resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
+    vmSize                        = "${var.vmSize}"
+    vmDiskCaching                 = "${var.vmDiskCaching}"
+    vmManagedDiskType             = "${var.vmManagedDiskType}"
+    vmUserName                    = "${var.vmUserName}"
+    vmPassword                    = "${var.vmPassword}"
+    vmSku                         = "${var.vmSku}"
+    vmOffer                       = "${var.vmOffer}"
+    subnetId                      = "${module.networking.subnetId}"
+    virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
+    virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
+    vmList                        = "${var.vmList}"
+    vmName                        = "${var.dc2Name}"
+    vmIPAddress                   = "${var.dc2IPAddress}"
 }

@@ -1,29 +1,27 @@
 # VM 1 - Create NIC
 resource "azurerm_network_interface" "vm" {
-  count                     = 2
-  name                      = "$${element(var["vmList.hostname"], count.index)}-nic1"
+  name                      = "${var.vmName}-nic1"
   location                  = "${var.resourceGroupLocation}"
   resource_group_name       = "${var.resourceGroupName}"
   dns_servers               = ["${var.virtualNetworkDnsServer1}", "${var.virtualNetworkDnsServer2}"]
 
   ip_configuration {
-    name                          = "$${element(var["vmList.hostname"], count.index)}-ipconfig1"
+    name                          = "${var.vmName}-ipconfig1"
     subnet_id                     = "${var.subnetId}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "$${element(var["vmList.ipAddress"], count.index)}"
-    #public_ip_address_id          = "${azurerm_public_ip.vm.id}"
+    private_ip_address            = "${var.vmIPAddress}"
+    public_ip_address_id          = "${azurerm_public_ip.vm.id}"
   }
 }
 
 # VM 1 - Create public IP
 resource "azurerm_public_ip" "vm" {
-  count                        = 2
-  name                         = "$${element(var["vmList.hostname"], count.index)}-public-ip"
+  name                         = "${var.vmName}-public-ip"
   location                     = "${var.resourceGroupLocation}"
   resource_group_name          = "${var.resourceGroupName}"
   public_ip_address_allocation = "Dynamic"
   idle_timeout_in_minutes      = 30
-  #domain_name_label            = "$${element(var["vmList.hostname"], count.index)}-azurevm"
+  domain_name_label            = "${var.vmName}-azurevm"
 }
 
 # VM 1 - Image details
@@ -34,8 +32,7 @@ data "azurerm_image" "image" {
 
 # VM 1 - Create VM
 resource "azurerm_virtual_machine" "vm" {
-  count                             = 2
-  name                              = "$${element(var["vmList.hostname"], count.index)}"
+  name                              = "${var.vmName}"
   location                          = "${var.resourceGroupLocation}"
   resource_group_name               = "${var.resourceGroupName}"
   network_interface_ids             = ["${azurerm_network_interface.vm.id}"]
@@ -48,7 +45,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   storage_os_disk {
-    name                = "$${element(var["vmList.hostname"], count.index)}-c"
+    name                = "${var.vmName}-c"
     caching             = "${var.vmDiskCaching}"
     create_option       = "FromImage"
     managed_disk_type   = "${var.vmManagedDiskType}"
@@ -60,7 +57,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
 
   os_profile {
-    computer_name       = "$${element(var["vmList.hostname"], count.index)}"
+    computer_name       = "${var.vmName}"
     admin_username      = "${var.vmUserName}"
     admin_password      = "${var.vmPassword}"
   }

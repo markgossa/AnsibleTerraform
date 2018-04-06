@@ -46,6 +46,10 @@ variable "subnetId" {
     type = "string"
 }
 
-variable "vmList" {
+variable "vmName" {
+    type = "map"
+}
+
+variable "vmIPAddress" {
     type = "map"
 }

@@ -1,12 +1,3 @@
-- set_fact:
-    vmList: "'{{ hostvars[groups['DomainControllers'][0]]['hostname'] }}' = \"{{ hostvars[groups['DomainControllers'][0]]['ipAddress'] }}\", '{{ hostvars[groups['DomainControllers'][1]]['hostname'] }}' = \"{{ hostvars[groups['DomainControllers'][1]]['ipAddress'] }}\""
-    
-- set_fact:
-    vmList: "{ {{ vmList }} }"
-
-- name: Return vmList
-  debug: var=vmList
-
 - name: Run terraform init
   command: "terraform init roles/azureInfrastructure/files"
 
@@ -37,5 +28,8 @@
   -var vmSku='{{ vmSku }}'
   -var vmOffer='{{ vmOffer }}'
   -var managementIP='{{ managementIP }}'
-  -var vmList='{{ vmList }}'
+  -var dc1Name='{{ hostvars[groups['DomainControllers'][0]]['hostname'] }}'
+  -var dc1IPAddress='{{ hostvars[groups['DomainControllers'][0]]['IPAddress'] }}'
+  -var dc2Name='{{ hostvars[groups['DomainControllers'][1]]['hostname'] }}'
+  -var dc2IPAddress='{{ hostvars[groups['DomainControllers'][1]]['IPAddress'] }}'
   roles/azureInfrastructure/files"
