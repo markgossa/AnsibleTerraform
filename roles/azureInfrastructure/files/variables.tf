@@ -82,11 +82,11 @@ variable "vmPassword" {
     type = "string"
 }
 
-variable "vmSku" {
+variable "vmOffer" {
     type = "string"
 }
 
-variable "vmOffer" {
+variable "vmSku" {
     type = "string"
 }
 
@@ -103,5 +103,29 @@ variable "dc2Name" {
 }
 
 variable "dc2IPAddress" {
+    type = "string"
+}
+
+variable "dcVMCustomImage" {
+    type = "boolean"
+}
+
+variable "webVMCustomImage" {
+    type = "boolean"
+}
+
+variable "web1Name" {
+    type = "string"
+}
+
+variable "web1IPAddress" {
+    type = "string"
+}
+
+variable "web2Name" {
+    type = "string"
+}
+
+variable "web2IPAddress" {
     type = "string"
 }

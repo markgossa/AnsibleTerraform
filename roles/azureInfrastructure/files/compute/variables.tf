@@ -53,3 +53,7 @@ variable "vmName" {
 variable "vmIPAddress" {
     type = "string"
 }
+
+variable "vmCustomImage" {
+    type = "boolean"
+}

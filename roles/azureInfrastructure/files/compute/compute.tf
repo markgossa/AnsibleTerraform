@@ -41,7 +41,16 @@ resource "azurerm_virtual_machine" "vm" {
   delete_data_disks_on_termination  = "True"
   
   storage_image_reference {
-    id="${data.azurerm_image.image.id}"
+    id    ="${data.azurerm_image.image.id}"
+    count = "${var.vmCustomImage} ? 1 : 0"
+  }
+
+  storage_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "${var.vmOffer}"
+    sku       = "${var.vmSku}"
+    version   = "latest"
+    count     = "${var.vmCustomImage} ? 0 : 1"
   }
 
   storage_os_disk {
