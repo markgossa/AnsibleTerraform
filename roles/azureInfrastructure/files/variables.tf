@@ -82,11 +82,27 @@ variable "vmPassword" {
     type = "string"
 }
 
-variable "vmOffer" {
+variable "dcVMOffer" {
     type = "string"
 }
 
-variable "vmSku" {
+variable "webVMOffer" {
+    type = "string"
+}
+
+variable "dcVMOffer" {
+    type = "string"
+}
+
+variable "dcVMOffer" {
+    type = "string"
+}
+
+variable "dcVMSku" {
+    type = "string"
+}
+
+variable "webVMSku" {
     type = "string"
 }
 
