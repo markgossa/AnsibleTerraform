@@ -90,14 +90,6 @@ variable "webVMOffer" {
     type = "string"
 }
 
-variable "dcVMOffer" {
-    type = "string"
-}
-
-variable "dcVMOffer" {
-    type = "string"
-}
-
 variable "dcVMSku" {
     type = "string"
 }
