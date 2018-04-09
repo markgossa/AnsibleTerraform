@@ -107,11 +107,11 @@ variable "dc2IPAddress" {
 }
 
 variable "dcVMCustomImage" {
-    type = "boolean"
+    type = "string"
 }
 
 variable "webVMCustomImage" {
-    type = "boolean"
+    type = "string"
 }
 
 variable "web1Name" {
