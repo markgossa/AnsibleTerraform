@@ -87,5 +87,5 @@ module "web1_compute" {
     vmName                        = "${var.web1Name}"
     vmIPAddress                   = "${var.web1IPAddress}"
     vmImageName                   = "${var.webVMImageName}"
-    vmImageResourceGroup          = "${var.webVMImageResourceGroup}
+    vmImageResourceGroup          = "${var.webVMImageResourceGroup}"
 }
