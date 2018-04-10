@@ -34,8 +34,8 @@
   -var web2Name='{{ hostvars[groups['WebServers'][1]]['hostname'] }}'
   -var web1IPAddress='{{ hostvars[groups['WebServers'][0]]['ipAddress'] }}'
   -var web2IPAddress='{{ hostvars[groups['WebServers'][1]]['ipAddress'] }}'
-  -var dcVMImageName='{{ hostvars[groups['DomainControllers']]['dcVMImageName'] }}'
-  -var dcVMImageResourceGroup='{{ hostvars[groups['DomainControllers']]['dcVMImageResourceGroup'] }}'
-  -var webVMImageName='{{ hostvars[groups['WebServers']]['webVMImageResourceGroup'] }}'
-  -var webVMImageResourceGroup='{{ hostvars[groups['WebServers']]['webVMImageResourceGroup'] }}'
+  -var dcVMImageName='{{ hostvars[groups['DomainControllers'][0]]['dcVMImageName'] }}'
+  -var dcVMImageResourceGroup='{{ hostvars[groups['DomainControllers'][0]]['dcVMImageResourceGroup'] }}'
+  -var webVMImageName='{{ hostvars[groups['WebServers'][0]]['webVMImageResourceGroup'] }}'
+  -var webVMImageResourceGroup='{{ hostvars[groups['WebServers'][0]]['webVMImageResourceGroup'] }}'
   roles/azureInfrastructure/files"
