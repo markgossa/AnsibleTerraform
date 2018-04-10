@@ -42,7 +42,6 @@ resource "azurerm_virtual_machine" "vm" {
   
   storage_image_reference {
     id    ="${data.azurerm_image.image.id}"
-    count = "${var.vmCustomImage} ? 1 : 0"
   }
 
   storage_os_disk {
