@@ -82,22 +82,6 @@ variable "vmPassword" {
     type = "string"
 }
 
-variable "dcVMOffer" {
-    type = "string"
-}
-
-variable "webVMOffer" {
-    type = "string"
-}
-
-variable "dcVMSku" {
-    type = "string"
-}
-
-variable "webVMSku" {
-    type = "string"
-}
-
 variable "dc1Name" {
     type = "string"
 }
@@ -114,14 +98,6 @@ variable "dc2IPAddress" {
     type = "string"
 }
 
-variable "dcVMCustomImage" {
-    type = "string"
-}
-
-variable "webVMCustomImage" {
-    type = "string"
-}
-
 variable "web1Name" {
     type = "string"
 }
@@ -135,5 +111,21 @@ variable "web2Name" {
 }
 
 variable "web2IPAddress" {
+    type = "string"
+}
+
+variable "dcVMImageName" {
+    type = "string"
+}
+
+variable "dcVMImageResourceGroup" {
+    type = "string"
+}
+
+variable "webVMImageName" {
+    type = "string"
+}
+
+variable "webVMImageResourceGroup" {
     type = "string"
 }

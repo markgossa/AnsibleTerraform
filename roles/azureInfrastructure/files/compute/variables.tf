@@ -26,14 +26,6 @@ variable "vmPassword" {
     type = "string"
 }
 
-variable "vmSku" {
-    type = "string"
-}
-
-variable "vmOffer" {
-    type = "string"
-}
-
 variable "virtualNetworkDnsServer1" {
     type = "string"
 }
@@ -54,6 +46,10 @@ variable "vmIPAddress" {
     type = "string"
 }
 
-variable "vmCustomImage" {
+variable "vmImageName" {
+    type = "string"
+}
+
+variable "vmImageResourceGroup" {
     type = "string"
 }

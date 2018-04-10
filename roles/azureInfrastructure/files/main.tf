@@ -45,14 +45,13 @@ module "dc1_compute" {
     vmManagedDiskType             = "${var.vmManagedDiskType}"
     vmUserName                    = "${var.vmUserName}"
     vmPassword                    = "${var.vmPassword}"
-    vmSku                         = "${var.dcVMSku}"
-    vmOffer                       = "${var.dcVMOffer}"
     subnetId                      = "${module.networking.subnetId}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     vmName                        = "${var.dc1Name}"
     vmIPAddress                   = "${var.dc1IPAddress}"
-    vmCustomImage                 = "${var.dcVMCustomImage}"
+    vmImageName                   = "${var.dcVMImageName}"
+    vmImageResourceGroup          = "${var.dcVMImageResourceGroup}"
 }
 
 module "dc2_compute" {
@@ -64,14 +63,13 @@ module "dc2_compute" {
     vmManagedDiskType             = "${var.vmManagedDiskType}"
     vmUserName                    = "${var.vmUserName}"
     vmPassword                    = "${var.vmPassword}"
-    vmSku                         = "${var.dcVMSku}"
-    vmOffer                       = "${var.dcVMOffer}"
     subnetId                      = "${module.networking.subnetId}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     vmName                        = "${var.dc2Name}"
     vmIPAddress                   = "${var.dc2IPAddress}"
-    vmCustomImage                 = "${var.dcVMCustomImage}"
+    vmImageName                   = "${var.dcVMImageName}"
+    vmImageResourceGroup          = "${var.dcVMImageResourceGroup}"
 }
 
 module "web1_compute" {
@@ -83,12 +81,11 @@ module "web1_compute" {
     vmManagedDiskType             = "${var.vmManagedDiskType}"
     vmUserName                    = "${var.vmUserName}"
     vmPassword                    = "${var.vmPassword}"
-    vmSku                         = "${var.webVMSku}"
-    vmOffer                       = "${var.webVMOffer}"
     subnetId                      = "${module.networking.subnetId}"
     virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     vmName                        = "${var.web1Name}"
     vmIPAddress                   = "${var.web1IPAddress}"
-    vmCustomImage                 = "${var.webVMCustomImage}"
+    vmImageName                   = "${var.webVMImageName}"
+    vmImageResourceGroup          = "${var.webVMImageResourceGroup}
 }

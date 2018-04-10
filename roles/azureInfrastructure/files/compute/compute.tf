@@ -26,8 +26,8 @@ resource "azurerm_public_ip" "vm" {
 
 # VM 1 - Image details
 data "azurerm_image" "image" {
-  name                = "contdc01-image-1709-dns"
-  resource_group_name = "Data"
+  name                = "${var.vmImageName}"
+  resource_group_name = "${var.vmImageResourceGroup}"
 }
 
 # VM 1 - Create VM
@@ -43,14 +43,6 @@ resource "azurerm_virtual_machine" "vm" {
   storage_image_reference {
     id    ="${data.azurerm_image.image.id}"
     count = "${var.vmCustomImage} ? 1 : 0"
-  }
-
-  storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "${var.vmOffer}"
-    sku       = "${var.vmSku}"
-    version   = "latest"
-    count     = "${var.vmCustomImage} ? 0 : 1"
   }
 
   storage_os_disk {
