@@ -12,3 +12,8 @@
   gather_facts: yes
   roles:
   - newADDomainController
+
+- hosts: WebServers
+  gather_facts: no
+  roles:
+  - webServer
