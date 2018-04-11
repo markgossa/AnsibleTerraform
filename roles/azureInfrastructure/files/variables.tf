@@ -114,11 +114,19 @@ variable "web2IPAddress" {
     type = "string"
 }
 
-variable "dcVMImageName" {
+variable "dcVM1ImageName" {
     type = "string"
 }
 
-variable "dcVMImageResourceGroup" {
+variable "dcVM1ImageResourceGroup" {
+    type = "string"
+}
+
+variable "dcVM2ImageName" {
+    type = "string"
+}
+
+variable "dcVM2ImageResourceGroup" {
     type = "string"
 }
 
