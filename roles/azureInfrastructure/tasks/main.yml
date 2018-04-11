@@ -36,6 +36,6 @@
   -var web2IPAddress='{{ hostvars[groups['WebServers'][1]]['ipAddress'] }}'
   -var dcVMImageName='{{ hostvars[groups['DomainControllers'][0]]['dcVMImageName'] }}'
   -var dcVMImageResourceGroup='{{ hostvars[groups['DomainControllers'][0]]['dcVMImageResourceGroup'] }}'
-  -var webVMImageName='{{ hostvars[groups['WebServers'][0]]['webVMImageResourceGroup'] }}'
+  -var webVMImageName='{{ hostvars[groups['WebServers'][0]]['webVMImageName'] }}'
   -var webVMImageResourceGroup='{{ hostvars[groups['WebServers'][0]]['webVMImageResourceGroup'] }}'
   roles/azureInfrastructure/files"
