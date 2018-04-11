@@ -89,3 +89,21 @@ module "web1_compute" {
     vmImageName                   = "${var.webVMImageName}"
     vmImageResourceGroup          = "${var.webVMImageResourceGroup}"
 }
+
+module "web2_compute" {
+    source                        = "compute"
+    resourceGroupName             = "${module.resourceGroup.resourceGroupName}"
+    resourceGroupLocation         = "${module.resourceGroup.resourceGroupLocation}"
+    vmSize                        = "${var.vmSize}"
+    vmDiskCaching                 = "${var.vmDiskCaching}"
+    vmManagedDiskType             = "${var.vmManagedDiskType}"
+    vmUserName                    = "${var.vmUserName}"
+    vmPassword                    = "${var.vmPassword}"
+    subnetId                      = "${module.networking.subnetId}"
+    virtualNetworkDnsServer1      = "${var.virtualNetworkDnsServer1}"
+    virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
+    vmName                        = "${var.web2Name}"
+    vmIPAddress                   = "${var.web2IPAddress}"
+    vmImageName                   = "${var.webVMImageName}"
+    vmImageResourceGroup          = "${var.webVMImageResourceGroup}"
+}
