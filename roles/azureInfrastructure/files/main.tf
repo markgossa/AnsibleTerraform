@@ -50,8 +50,8 @@ module "dc1_compute" {
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     vmName                        = "${var.dc1Name}"
     vmIPAddress                   = "${var.dc1IPAddress}"
-    vmImageName                   = "${var.dcVMImageName}"
-    vmImageResourceGroup          = "${var.dcVMImageResourceGroup}"
+    vmImageName                   = "${var.dcVM1ImageName}"
+    vmImageResourceGroup          = "${var.dcVM1ImageResourceGroup}"
 }
 
 module "dc2_compute" {
@@ -68,8 +68,8 @@ module "dc2_compute" {
     virtualNetworkDnsServer2      = "${var.virtualNetworkDnsServer2}"
     vmName                        = "${var.dc2Name}"
     vmIPAddress                   = "${var.dc2IPAddress}"
-    vmImageName                   = "${var.dcVMImageName}"
-    vmImageResourceGroup          = "${var.dcVMImageResourceGroup}"
+    vmImageName                   = "${var.dcVM2ImageName}"
+    vmImageResourceGroup          = "${var.dcVM2ImageResourceGroup}"
 }
 
 module "web1_compute" {
